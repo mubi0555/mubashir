@@ -18,6 +18,7 @@ app.use(function(request,response,next){
 });
 app.use(morgan('dev'));
 var Menu=require('./apps/models/menus.js');
+// var Restaurant=require('./apps/models/Restaurant.js');
 app.get('/',function(req,res){
     res.sendFile(__dirname+"/public/views/pages/index.html");
 })
@@ -33,20 +34,20 @@ apiRouter.get('/findmenu',function(req,res){
      });
 });
 apiRouter.post('/addmenu',function(req,res){
-    // var menu=req.body.Menu;
-    // var price=req.body.price;
-    // var catgory=req.body.catgory;
        console.log(req.body);
   var M=new Menu({
       menu: req.body.menu,
       price:req.body.price,
-      catagory: req.body.catagory
-  });
+      catagory: req.body.catagory,
+      restaurant: req.body.restaurant});
+  
+
   M.save(function(err,data){
       if(err){
           res.status(400).json(err);
       }
       else{
+          
           res.json(data);
       }
       
@@ -62,11 +63,14 @@ apiRouter.put('/updatemenu',function(req,res){
                data.menu=req.body.menu;
                data.price=req.body.price;
                data.catagory=req.body.catagory;
+               data.restaurant=req.body.restaurant;
                      data.save(function(err,updatedData){
       if(err){
           res.status(400).json(err);
+
       }
       else{
+          console.log(data);
           res.json(updatedData);
       }
   });

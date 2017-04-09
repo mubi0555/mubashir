@@ -38,7 +38,7 @@ return CRUDdata;
             controller: 'UpdateCtrl'
         })
         
-        .otherwise("/")
+        .otherwise("/showmenu")
         $locationProvider.html5Mode(true);
     }]);
 
@@ -59,17 +59,19 @@ $scope.AllMenus=[];
     $scope.menu='';
     $scope.price='';
     $scope.catagory='';
-
+    $scope.restaurant='';
 
     $scope.AddMenu=function(){
-    var data={menu: $scope.menu, price:$scope.price,catagory:$scope.catagory};
+    var data={menu: $scope.menu, price:$scope.price,catagory:$scope.catagory, restaurant:$scope.restaurant};
 
            CRUDdata.createMenu(data)
             .then(function(response){
+            $location.path('/showmenu');
             console.log("Saved");
             },function(err){
                 console.log(err);
             });
+
 
     }
 
@@ -93,7 +95,7 @@ $scope.Updatepage=function(id){
 
 });
 
-app.controller('UpdateCtrl',function($scope,CRUDdata,$routeParams){
+app.controller('UpdateCtrl',function($scope,CRUDdata,$routeParams,$location){
   $scope.SearchMenu={};
 
 Search($routeParams.id);
@@ -109,17 +111,17 @@ console.log($routeParams.id);
     });
 }
 
-
    $scope.UpdateMenu=function(id){ 
     CRUDdata.updatMenu($scope.SearchMenu)
     .then(function(response){
         $location.path('/showmenu');
+        console.log(response.data);
+        
         console.log('Data has been Updated');
     },function(err){
         console.log(err);
     })
 }
-
 
 });
 
