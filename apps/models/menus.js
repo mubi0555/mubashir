@@ -4,12 +4,12 @@ var MenuSchema=new Schema({
     
     menu : String,
     price: Number,
-    catagory: String,
+    catagory: String
     // restaurant: {
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'Restaurant'
     // }
-   restaurant: String
+//    restaurant: String
 });
 
 module.exports=mongooose.model('Menu',MenuSchema);

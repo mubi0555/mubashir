@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var mongoose =  require('mongoose');
 var morgan = require('morgan'); 
 var port = process.env.PORT || 3000;
-mongoose.connect('mongodb://localhost:27017/Lasania');
+mongoose.connect('mongodb://localhost:27017/RestaurantDB');
 //app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true})
 );
@@ -18,7 +18,7 @@ app.use(function(request,response,next){
 });
 app.use(morgan('dev'));
 var Menu=require('./apps/models/menus.js');
-// var Restaurant=require('./apps/models/Restaurant.js');
+var Restaurant=require('./apps/models/Restaurant.js');
 app.get('/',function(req,res){
     res.sendFile(__dirname+"/public/views/pages/index.html");
 })
@@ -39,8 +39,9 @@ apiRouter.post('/addmenu',function(req,res){
       menu: req.body.menu,
       price:req.body.price,
       catagory: req.body.catagory,
-      restaurant: req.body.restaurant});
-  
+    //  restaurant: req.body.restaurant
+    });
+
 
   M.save(function(err,data){
       if(err){
@@ -102,7 +103,56 @@ Menu.remove({_id: req.params.id},function(err,data){
 });
 
 
+
+
+
+
 app.use('/api',apiRouter);
+
+
+
+var RestaurantRouter = express.Router();
+
+
+RestaurantRouter.post('/createRestaurant',function(request,response){
+
+var R=new Restaurant({
+   name: request.body.RestaurantName,
+   address: request.body.address,
+   phone: request.body.phone,
+   typeofcuisine: request.body.cuisine,
+   tags: request.body.tags,
+   hoursofoperation:[{
+       day: request.body.day,
+       close: request.body.close,
+       open: request.body.open
+
+}]
+   
+});
+      R.save(function(error,data){
+
+          if(error){
+              response.status(400).json();
+          }
+          else{
+              response.json(data);
+              console.log('Restaurant Created');
+          }
+      });
+
+});
+
+
+RestaurantRouter.get('/findRestaurant',function(req,res){
+     Restaurant.find(function(error,data){
+         if(error){
+             res.status(400).json(err);
+         }
+         res.json(data);
+     });
+});
+
 
 app.listen(port);
 
