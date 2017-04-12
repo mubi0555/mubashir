@@ -9,8 +9,8 @@ var RestaurantSchema=new Schema({
     tags: String,
     hoursofoperation:[{
         day: String,
-        open: new Date(),
-        close: new Date()
+        open:  Date,
+        close: Date
     }]
 });
 
