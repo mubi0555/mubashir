@@ -7,11 +7,6 @@ var RestaurantSchema=new Schema({
     phone: String,
     typeofcuisine: String,
     tags: String,
-    // hoursofoperation: [{
-    //     type: mongooose.Schema.Types.ObjectId,
-    //     ref : 'HoursOfOperation'
-    // }]
-
     hoursofoperation:[{
         day: String,
         open: new Date(),
