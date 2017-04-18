@@ -1,5 +1,6 @@
 var app=angular.module('MyApp',['ngRoute']);
 
+
 app.factory('CRUDdata',['$http',function($http){
 
 var url='/api/';
@@ -23,26 +24,57 @@ CRUDdata.deleteMenu=function(id){
 return CRUDdata;
 }]);
 
- app.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider) {
-	$routeProvider
-		.when('/createMenu', {
-			templateUrl: 'views/pages/createMenu.html',
-			controller: 'MenuCtrl'
-		})
-        .when('/showmenu', {
-			templateUrl: 'views/pages/showmenu.html',
-			controller: 'MenuCtrl'
-		})
-        .when('/updatemenu/:id',{
-            templateUrl: 'views/pages/updatemenu.html',
-            controller: 'UpdateCtrl'
+app.factory('LoginService',['$http',function($http){
+   var loginUrl='/User/';
+   var LoginData={};
+   LoginData.createUser=function(data){
+       return $http.post(loginUrl+'createUser',data);
+   }
+   LoginData.AuthenticateUser=function(data){
+
+       return $http.post(loginUrl+'loginAuthentication',data);
+   }
+   return LoginData;
+}]);
+
+
+app.controller('LoginCtrl',function(LoginService,$scope){
+    $scope.email='';
+    $scope.password='';
+    $scope.Login=function(){
+        var SearchData={
+            email: $scope.email,
+            password: $scope.password
+        }
+        LoginService.AuthenticateUser(SearchData)
+        .then(function(response){
+            console.log('Authenticated user');
+        },function(err){
+            console.log(err);
         })
-        
-        .otherwise("/showmenu")
-        $locationProvider.html5Mode(true);
-    }]);
+    }
 
+});
 
+app.controller('SignUp',function(LoginService,$scope){
+    $scope.name='';
+    $scope.email='';
+    $scope.password='';
+
+    $scope.SignUP=function(){
+        var SignUpData={
+            name: $scope.name,
+            email: $scope.email,
+            password: $scope.password
+        };
+        LoginService.createUser(SignUpData)
+        .then(function(res){
+            console.log('You have successfully signup');
+        },function(err){
+            console.log(err);
+        });
+    }
+})
 
 app.controller('MenuCtrl',function($scope,CRUDdata,$routeParams,$location){
 

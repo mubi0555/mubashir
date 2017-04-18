@@ -10,8 +10,6 @@ MenuRouter.get('/findmenu',function(req,res){
      });
 });
 
-
-
 MenuRouter.post('/addmenu',function(req,res){
        console.log(req.body);
   var M=new Menu({
