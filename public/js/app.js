@@ -3,7 +3,7 @@ var app=angular.module('MyApp',['ngRoute']);
 
 app.factory('CRUDdata',['$http',function($http){
 
-var url='/api/';
+var url='/Menus/';
 var CRUDdata={};
 
 CRUDdata.getAllMenus=function(){

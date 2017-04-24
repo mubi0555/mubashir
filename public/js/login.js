@@ -23,6 +23,6 @@ var app=angular.module('MyApp');
         })
 
         
-        .otherwise("/signup")
+        .otherwise("/showmenu")
         $locationProvider.html5Mode(true);
     }]);
