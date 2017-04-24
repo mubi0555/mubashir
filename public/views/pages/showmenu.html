@@ -1,21 +1,27 @@
-   </div>
-              <div class="container">
-               <table class="AllMenus">
-                 <thead>
-                  <tr>
-                    <th> Menu </th>
-                    <th> Price </th>
-                    <th> Catagory </th>
-                  </tr>
-                 </thead>
-                 <tbody>
-                  <tr ng-repeat="key in AllMenus">
-                    <td>{{key.menu}}</td>
-                    <td>{{key.price}}</td>
-                    <td>{{key.catagory}}</td>
-                    <td><button ng-click="DeleteMenu(key._id)">Delete</button></td>
-                    <td><a ng-click="Updatepage(key._id)" >Update</a></td>
-                  </tr>
-                 </tbody>
-               </table> 
-            </div>
+<div>
+  <div class="container">
+    <div class="search">
+      <input type="text" ng-model="menu" />
+    </div>
+    <table class="AllMenus">
+         <thead>
+        <tr>
+          <th> Menu </th>
+          <th> Price </th>
+          <th> Catagory </th>
+          <th>Name </th>>
+        </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="key in AllMenus| filter : menu">
+            <td>{{key.menu}}</td>
+            <td>{{key.price}}</td>
+            <td>{{key.catagory}}</td>
+            <td>{{key.restaurant}}</td>
+            <td><button ng-click="DeleteMenu(key._id)">Delete</button></td>
+            <td><a ng-click="Updatepage(key._id)">Update</a></td>
+          </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
