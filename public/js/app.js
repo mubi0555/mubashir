@@ -109,7 +109,7 @@ $scope.AllMenus=[];
 
            CRUDdata.createMenu(data)
             .then(function(response){
-            $location.path('/showmenu');
+            $location.path('/home');
             console.log("Saved");
             },function(err){
                 console.log(err);
