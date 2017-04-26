@@ -21,8 +21,11 @@ var app=angular.module('MyApp');
             templateUrl: 'views/pages/updatemenu.html',
             controller: 'UpdateCtrl'
         })
-
+        .when('/home',{
+            templateUrl: 'views/pages/home.html',
+            controller: 'MenuCtrl'
+        })
         
-        .otherwise("/showmenu")
+        .otherwise("/home")
         $locationProvider.html5Mode(true);
     }]);

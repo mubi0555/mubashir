@@ -11,18 +11,14 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
         <script src="/js/app.js"></script>
-        <script src="/js/login.js"></script>
+        <script src="/js/route.js"></script>
   </head>
      <body ng-app="MyApp" ng-controller="MenuCtrl">
-           <h2>Welcome to Lasania deployed</h2>
-           <h2>Welcome to Lasania </h2>
-           <a href="/showmenu">Show Menus</a>
+           <!--<a href="/showmenu">Show Menus</a>-->
           <a href="/createMenu" >Add Menu</a></br>
-          <!--<p>Login or SignUP with:</p>
-        <a href="/login" >Local Login</a>
-        <a href="/signup">Local Signup</a>-->
-            <div class="content">  
-              <div ng-view></div>
+          
+            <div class="content" >  
+              <div ng-view  ></div>
             </div>
      </body>
 </html>

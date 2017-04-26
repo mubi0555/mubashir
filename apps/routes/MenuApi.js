@@ -1,13 +1,16 @@
 var express=require('express');
 var MenuRouter=express.Router();
 var Menu=require('../models/menus.js');
-MenuRouter.get('/findmenu',function(req,res){
-     Menu.find(function(err,data){
+
+MenuRouter.get('/findmenu/:name',function(req,res){
+    // name='shawarma';
+     Menu.find({ $text: { $search: req.params.name }},function(err,data){
          if(err){
              res.status(400).json(err);
          }
          res.json(data);
      });
+    
 });
 
 MenuRouter.post('/addmenu',function(req,res){

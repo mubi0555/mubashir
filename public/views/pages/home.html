@@ -1,19 +1,17 @@
-<!doctype html>
-<html>
-<head>
-    <title>Node Authentication</title>
-    
-<body>
-<div class="container">
+<div>
+<input id="search" type="text" ng-model="Search" style="width : 60%; margin-left: 200px; margin-top: 100px"/>
+          <button ng-click="GO()" >GO</button>
 
-    <div class="sub-container">
-        <h1><span class="heading"></span> Node Authentication</h1>
+          <div>
+          <ul>
+           <li ng-repeat="Menu in AllMenus">
+              {{Menu.menu}}
+              {{Menu.price}}
+              {{Menu.catagory}}
+              {{Menu.serving}}
 
-        <p>Login or SignUP with:</p>
-        <a href="/login" >Local Login</a>
-        <a href="/signup">Local Signup</a>
-    </div>
-
+           </li>
+           
+          </ul>
+          </div>
 </div>
-</body>
-</html>

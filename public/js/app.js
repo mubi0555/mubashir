@@ -6,8 +6,8 @@ app.factory('CRUDdata',['$http',function($http){
 var url='/Menus/';
 var CRUDdata={};
 
-CRUDdata.getAllMenus=function(){
-    return $http.get(url+'findmenu');
+CRUDdata.getAllMenus=function(name){
+    return $http.get(url+'findmenu/'+name);
 }
 CRUDdata.searchMenu=function(id){
     return $http.get(url+'searchmenu/'+id);
@@ -79,22 +79,33 @@ app.controller('SignUp',function(LoginService,$scope){
 app.controller('MenuCtrl',function($scope,CRUDdata,$routeParams,$location){
 
 $scope.AllMenus=[];
+    $scope.GO=function(){
+        CRUDdata.getAllMenus($scope.Search)
+        .then(function(res){
+            $scope.AllMenus=res.data;
+            console.log('Searching');
+            console.log($scope.AllMenus);
+        },function(err){
+            console.log(err);
+        })
+    }
 
-    CRUDdata.getAllMenus()
-    .then(function(response){
-        $scope.AllMenus=response.data;
-    },function(err){
-        console.log(err);
-    })
+
+    // CRUDdata.getAllMenus()
+    // .then(function(response){
+    //     $scope.AllMenus=response.data;
+    // },function(err){
+    //     console.log(err);
+    // })
 
 
     $scope.menu='';
     $scope.price='';
     $scope.catagory='';
-    $scope.restaurant='';
+    $scope.serving='';
 
     $scope.AddMenu=function(){
-    var data={menu: $scope.menu, price:$scope.price,catagory:$scope.catagory, restaurant:$scope.restaurant};
+    var data={menu: $scope.menu, price:$scope.price,catagory:$scope.catagory, restaurant:$scope.serving};
 
            CRUDdata.createMenu(data)
             .then(function(response){
