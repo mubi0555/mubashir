@@ -105,7 +105,7 @@ $scope.AllMenus=[];
     $scope.serving='';
 
     $scope.AddMenu=function(){
-    var data={menu: $scope.menu, price:$scope.price,catagory:$scope.catagory, restaurant:$scope.serving};
+    var data={menu: $scope.menu, price:$scope.price,catagory:$scope.catagory, serving:$scope.serving};
 
            CRUDdata.createMenu(data)
             .then(function(response){

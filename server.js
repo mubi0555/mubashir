@@ -3,9 +3,6 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose =  require('mongoose');
 var morgan = require('morgan'); 
-var flash= require('connect-flash');
-var cookieParser=require('cookie-parser');
-var session= require('express-session');
 var port = process.env.PORT || 3000;
 mongoose.connect('mongodb://heroku:fzUNhvJzxmbYL2e9suuYhcnBjZkDBbaGBlABlqJKnGYGPl4PFgyEAe53dNFFgnVBnMBib8SMlntoo0C4TkLTcA@candidate.45.mongolayer.com:11331,candidate.42.mongolayer.com:10693/app65734096');
 app.use(bodyParser.urlencoded({extended: true})

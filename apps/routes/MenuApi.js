@@ -20,6 +20,7 @@ MenuRouter.post('/addmenu',function(req,res){
       price:req.body.price,
       catagory: req.body.catagory,
     //  restaurant: req.body.restaurant
+     serving: req.body.serving
     });
 
 
