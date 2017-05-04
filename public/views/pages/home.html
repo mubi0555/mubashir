@@ -1,8 +1,36 @@
 <div class="container">
-<input id="search" type="text" ng-model="Search" style="width : 60%; margin-left: 200px; margin-top: 100px"/>
-          <button ng-click="GO()" >GO</button>
+  <div class="row">
+    <div class="col-md-12 col-xs-12">
+<input id="search" type="text" ng-model="Search" style="width : 60%; margin-left: 200px; margin-top: 10px"/>
+          <button ng-click="GO()" style="background-color:skyblue" >GO</button>
+  
+    </div>
 
-   <div>
+  </div>
+  <!--<div class="row">
+<table class="table" ng-show="AllRestaurants.length">
+<thead>
+<tr>
+<th> Restaurant</th>
+<th> Address </th>
+<th> Phone # </th>
+<th> Tags </th>
+<th> Type Of Cousine </th>
+</tr>
+</thead>
+<tbody ng-repeat="Restaurant in AllRestaurants">
+<tr>
+<td> {{Restaurant.restaurant}}</td>
+<td> {{Restaurant.address}}</td>
+<td> {{Restaurant.phone}}</td>
+<td> {{Restaurant.tags}}</td>
+<td> {{Restaurant.typeofcuisine}}</td>
+</tr>
+</tbody>
+
+</table>
+  </div>-->
+   <div class="row">
     <table class="table" ng-show="AllMenus.length" >
       <thead>
         <tr>
@@ -12,7 +40,7 @@
           <th>Location</th>
           <th> Health </th>
           <th> Serving </th>
-          <th> Caagory </th>
+          <th> Category </th>
         </tr>
       </thead>
       <tbody ng-repeat="Menu in AllMenus" >

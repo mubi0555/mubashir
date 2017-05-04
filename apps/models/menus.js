@@ -1,20 +1,19 @@
-var mongooose = require('mongoose');
+var mongoose = require('mongoose');
 var textSearch=require('mongoose-text-search');
-var Schema=mongooose.Schema;
+var Schema=mongoose.Schema;
 var MenuSchema=new Schema({
     
     menu : String,
     price: Number,
     catagory: String,
     serving: Number,
-    details: String
-    // restaurant: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Restaurant'
-    // }
-//    restaurant: String
+    details: String,
+    restaurant: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Restaurant'
+    }]
     
 });
 MenuSchema.plugin(textSearch);
-MenuSchema.index({'$**':'text'});
-module.exports=mongooose.model('Menu',MenuSchema);
+MenuSchema.index({menu:'text', catagory:'text'});
+module.exports=mongoose.model('Menu',MenuSchema);

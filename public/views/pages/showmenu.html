@@ -1,27 +1,26 @@
-<div>
-  <div class="container">
-    <!--<div class="search">
-      <input type="text" ng-model="menu" />
-    </div>-->
-    <table class="AllMenus">
-         <thead>
+   <div class="row">
+    <table class="table" ng-show="AllMenus.length" >
+      <thead>
         <tr>
-          <th> Menu </th>
-          <th> Price </th>
-          <th> Catagory </th>
-          <th>Serving </th>>
+          <th>Menu Item</th>
+          <th>Open </th>
+          <th> Price</th>
+          <th>Location</th>
+          <th> Health </th>
+          <th> Serving </th>
+          <th> Category </th>
         </tr>
-        </thead>
-        <tbody>
-          <tr >
-            <td>{{key.menu}}</td>
-            <td>{{key.price}}</td>
-            <td>{{key.catagory}}</td>
-            <td>{{key.serving}}</td>
-            <!--<td><button ng-click="DeleteMenu(key._id)">Delete</button></td>
-            <td><a ng-click="Updatepage(key._id)">Update</a></td>-->
-          </tr>
-        </tbody>
+      </thead>
+      <tbody ng-repeat="Menu in AllMenus" >
+         <tr>
+           <td>{{Menu.menu}}</td>
+           <td>Yes</td>
+           <td>{{Menu.price}}</td>
+           <td> Not Found</td>
+           <td>Halal</td>
+           <td> {{Menu.serving}}</td>
+           <td>{{Menu.catagory}}</td>
+         </tr>
+      </tbody>
     </table>
-    </div>
-</div>
+   </div>

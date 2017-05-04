@@ -25,7 +25,14 @@ var app=angular.module('MyApp');
             templateUrl: 'views/pages/home.html',
             controller: 'MenuCtrl'
         })
-        
+        .when('/createRestaurant',{
+            templateUrl: 'views/pages/createRestaurant.html',
+            controller: 'MenuCtrl'
+        })
+        .when('/showRestaurant',{
+            templateUrl: 'views/pages/showRestaurant.html',
+            controller: 'MenuCtrl'
+        })
         .otherwise("/home")
         $locationProvider.html5Mode(true);
     }]);

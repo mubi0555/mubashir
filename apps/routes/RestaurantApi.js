@@ -13,7 +13,7 @@ var R=new Restaurant({
     phone: req.body.phone,
     typeofcuisine: req.body.cuisine,
     tags: req.body.tags,
-    hoursofoperation: req.body.hoursofoperation
+    // hoursofoperation: req.body.hoursofoperation
 });
 
 
@@ -34,8 +34,8 @@ var R=new Restaurant({
 
 });
 
-RestaurantRouter.get('/findRestaurant',function(req,res){
-     Restaurant.find(function(error,data){
+RestaurantRouter.get('/findRestaurant/:name',function(req,res){
+     Restaurant.findOne(function(error,data){
          if(error){
              res.status(400).json(err);
          }

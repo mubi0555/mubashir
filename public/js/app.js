@@ -9,9 +9,6 @@ var CRUDdata={};
 CRUDdata.getAllMenus=function(name){
     return $http.get(url+'findmenu/'+name);
 }
-CRUDdata.searchMenu=function(id){
-    return $http.get(url+'searchmenu/'+id);
-}
 CRUDdata.createMenu=function(data){
     return $http.post(url+'addmenu',data);
 }
@@ -21,9 +18,22 @@ CRUDdata.updatMenu=function(data){
 CRUDdata.deleteMenu=function(id){
     return $http.delete(url+'deletemenu/'+id);
 }
+CRUDdata.searchMenu=function(id){
+    return $http.get(url+'searchmenu/'+id);
+}
 return CRUDdata;
 }]);
-
+app.factory('RestaurantServices',['$http',function($http){
+     restaurantUrl='/Restaurant/';
+     var RestaurantData={};
+     RestaurantData.createRestaurant=function(data){
+         return $http.post(restaurantUrl+'createRestaurant',data);
+     }
+     RestaurantData.getAllRestaurant=function(name){
+         return $http.get(restaurantUrl+'findRestaurant/:'+name);
+     }
+     return RestaurantData;
+}]);
 app.factory('LoginService',['$http',function($http){
    var loginUrl='/User/';
    var LoginData={};
@@ -76,9 +86,10 @@ app.controller('SignUp',function(LoginService,$scope){
     }
 })
 
-app.controller('MenuCtrl',function($scope,CRUDdata,$routeParams,$location){
+app.controller('MenuCtrl',function($scope,CRUDdata,$routeParams,$location,RestaurantServices){
 
 $scope.AllMenus=[];
+$scope.AllRestaurants=[];
     $scope.GO=function(){
         CRUDdata.getAllMenus($scope.Search)
         .then(function(res){
@@ -87,17 +98,53 @@ $scope.AllMenus=[];
             console.log($scope.AllMenus);
         },function(err){
             console.log(err);
-        })
+        });
+        if($scope.AllMenus.length==0){
+           RestaurantServices.getAllRestaurant($scope.Search)
+           .then(function(res){
+                  $scope.AllRestaurants=res.data;
+                  console.log($scope.AllRestaurants);
+           },function(err){
+               console.log(err);
+           })
+        }
+    }
+// 
+//     $scope.GO=function(){
+//         RestaurantServices.getAllRestaurant($scope.Search)
+//         .then(function(res){
+//             $scope.AllRestaurants=res.data;
+//             console.log('Searching');
+//             console.log($scope.AllRestaurants);
+//         },function(err){
+//             console.log(err);
+//         })
+//     }
+$scope.restaurant='';
+$scope.address='';
+$scope.phone='';
+$scope.tags='';
+$scope.typeofcuisine=''
+
+
+$scope.AddRetaurant=function(){
+    var data={
+        restaurant: $scope.restaurant,
+        address: $scope.address,
+        phone: $scope.phone,
+        tags: $scope.tags,
+        typeofcuisine: $scope.typeofcuisine
     }
 
+        RestaurantServices.createRestaurant(data)
+        .then(function(res){
+            $location.path('/home')
+            console.log(res.data);
+        },function(err){
+            console.log(err);
+        });
 
-    // CRUDdata.getAllMenus()
-    // .then(function(response){
-    //     $scope.AllMenus=response.data;
-    // },function(err){
-    //     console.log(err);
-    // })
-
+}
 
     $scope.menu='';
     $scope.price='';
