@@ -1,31 +1,33 @@
 var app=angular.module('MyApp',['ngRoute']);
 
 
-app.factory('CRUDdata',['$http',function($http){
+app.factory('MenuData',['$http',function($http){
 
 var url='/Menus/';
-var CRUDdata={};
+var MenuData={};
 
-CRUDdata.getAllMenus=function(name){
+MenuData.getAllMenus=function(name){
     return $http.get(url+'findmenu/'+name);
 }
-CRUDdata.createMenu=function(data){
+MenuData.createMenu=function(data){
     return $http.post(url+'addmenu',data);
 }
-CRUDdata.updatMenu=function(data){
+MenuData.updatMenu=function(data){
     return $http.put(url+'updatemenu',data);
 }
-CRUDdata.deleteMenu=function(id){
+MenuData.deleteMenu=function(id){
     return $http.delete(url+'deletemenu/'+id);
 }
-CRUDdata.searchMenu=function(id){
+MenuData.searchMenu=function(id){
     return $http.get(url+'searchmenu/'+id);
 }
-return CRUDdata;
+return MenuData;
 }]);
 app.factory('RestaurantServices',['$http',function($http){
      restaurantUrl='/Restaurant/';
      var RestaurantData={};
+     RestaurantData.restaurantId=null;
+
      RestaurantData.createRestaurant=function(data){
          return $http.post(restaurantUrl+'createRestaurant',data);
      }
@@ -84,14 +86,14 @@ app.controller('SignUp',function(LoginService,$scope){
             console.log(err);
         });
     }
-})
+});
 
-app.controller('MenuCtrl',function($scope,CRUDdata,$routeParams,$location,RestaurantServices){
+app.controller('MenuCtrl',function($scope,MenuData,$routeParams,$location,RestaurantServices){
 
 $scope.AllMenus=[];
 $scope.AllRestaurants=[];
     $scope.GO=function(){
-        CRUDdata.getAllMenus($scope.Search)
+        MenuData.getAllMenus($scope.Search)
         .then(function(res){
             $scope.AllMenus=res.data;
             console.log('Searching');
@@ -99,46 +101,24 @@ $scope.AllRestaurants=[];
         },function(err){
             console.log(err);
         });
-        if($scope.AllMenus.length==0){
-           RestaurantServices.getAllRestaurant($scope.Search)
-           .then(function(res){
-                  $scope.AllRestaurants=res.data;
-                  console.log($scope.AllRestaurants);
-           },function(err){
-               console.log(err);
-           })
-        }
     }
-// 
-//     $scope.GO=function(){
-//         RestaurantServices.getAllRestaurant($scope.Search)
-//         .then(function(res){
-//             $scope.AllRestaurants=res.data;
-//             console.log('Searching');
-//             console.log($scope.AllRestaurants);
-//         },function(err){
-//             console.log(err);
-//         })
-//     }
 $scope.restaurant='';
 $scope.address='';
 $scope.phone='';
-$scope.tags='';
-$scope.typeofcuisine=''
-
-
-$scope.AddRetaurant=function(){
+$scope.timings='';
+$scope.restaurantID='';
+$scope.AddRestaurant=function(){
     var data={
         restaurant: $scope.restaurant,
         address: $scope.address,
         phone: $scope.phone,
-        tags: $scope.tags,
-        typeofcuisine: $scope.typeofcuisine
+        timings: $scope.timings,
     }
-
         RestaurantServices.createRestaurant(data)
         .then(function(res){
-            $location.path('/home')
+            RestaurantServices.restaurantId=res.data._id;
+            console.log(RestaurantServices.restaurantId);
+            $location.path('/createMenu');
             console.log(res.data);
         },function(err){
             console.log(err);
@@ -150,13 +130,23 @@ $scope.AddRetaurant=function(){
     $scope.price='';
     $scope.catagory='';
     $scope.serving='';
-
+    $scope.quantity='';
+    $scope.details='';
+    $scope.ID='';
     $scope.AddMenu=function(){
-    var data={menu: $scope.menu, price:$scope.price,catagory:$scope.catagory, serving:$scope.serving};
+    var data={menu: $scope.menu,
+         price:$scope.price,
+         catagory:$scope.catagory,
+          serving:$scope.serving,
+           quantity: $scope.quantity,
+            details:  $scope.details,
+            ID: RestaurantServices.restaurantId
+    };
 
-           CRUDdata.createMenu(data)
+           MenuData.createMenu(data)
             .then(function(response){
-            $location.path('/home');
+                console.log(response);
+            $location.path('/createMenu');
             console.log("Saved");
             },function(err){
                 console.log(err);

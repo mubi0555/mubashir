@@ -1,10 +1,34 @@
-<div class="CreateMenuForm"  >
-    <form >
-     Menu : <input type="text" ng-model="menu"/><br>
-     Price : <input type="text" ng-model="price"/><br>
-     Catagory: <input type="text" ng-model="catagory"/><br>
-     <!--Restaurant Name: <input type="text" ng-model="restaurant"/><br>-->
-     Serving : <input type="text" ng-model="serving"/><br>
-    <button ng-click="AddMenu()">Create</button><br>
-    </form>
+<div class="container">
+  <div class="row">
+	<h1 style="text-align: center;">Menu Form</h1>
+		<div style="width: 30%; margin: 0 auto;">
+			<form  >
+			   <div  class="form-group">
+			   		  <label>Menu</label>
+                          <input class="form-control" type="text" ng-model="menu"  placeholder="e.g Burger">
+			   </div>
+			    <div class="form-group">
+                    <label>Price</label>
+				       <input class="form-control" type="text" ng-model="price" placeholder="$">
+				</div>	
+                <div class="form-group">
+                    <label>Catagory</label>
+				       <input class="form-control" type="text" ng-model="catagory" placeholder="e.g">
+				</div>	
+                <div class="form-group">
+                    <label>Serving</label>
+				       <input class="form-control" type="text" ng-model="serving" placeholder="e.g Large/Small">
+				</div>
+                <div class="form-group">
+                    <label>Quantity</label>
+				       <input class="form-control" type="text" ng-model="quantity" placeholder="e.g Large/Small">
+				</div>				
+                <div class="form-group">
+                    <label>Details</label>
+				       <input class="form-control" type="text" ng-model="details" placeholder="e.g">
+				</div>
+				      <button ng-click="AddMenu()">Create</button>
+			</form>
+		</div>		
+  </div>
 </div>

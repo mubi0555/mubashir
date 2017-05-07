@@ -4,14 +4,19 @@ var Schema=mongoose.Schema;
 var MenuSchema=new Schema({
     
     menu : String,
+    glutenfree:{
+      type: String,
+      enum: ['Yes','No']
+    },
     price: Number,
     catagory: String,
-    serving: Number,
+    serving: String,
+    quantity: String,
     details: String,
-    restaurant: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Restaurant'
-    }]
+    restaurant: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref : 'Restaurant'
+    }
     
 });
 MenuSchema.plugin(textSearch);

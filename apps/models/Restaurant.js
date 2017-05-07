@@ -6,13 +6,7 @@ var RestaurantSchema=new Schema({
     restaurant: String,
     address: {type: String, unique: true},
     phone: String,
-    typeofcuisine: String,
-    tags: String,
-    hoursofoperation:[{
-        day: String,
-        open:  Date,
-        close: Date
-    }],
+    timings: String,
     menu: [{
         type: mongooose.Schema.Types.ObjectId,
         ref: 'menu'

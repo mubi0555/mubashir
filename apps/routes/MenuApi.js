@@ -29,10 +29,11 @@ MenuRouter.post('/addmenu',function(req,res){
        console.log(req.body);
   var M=new Menu({
       menu: req.body.menu,
-      price:req.body.price,
+      price:parseInt(req.body.price),
       catagory: req.body.catagory,
-    //  restaurant: req.body.restaurant
-     serving: req.body.serving
+      restaurant: req.body.ID,
+      serving: req.body.serving
+      
     });
 
 
@@ -41,7 +42,7 @@ MenuRouter.post('/addmenu',function(req,res){
           res.status(400).json(err);
       }
       else{
-          
+          console.log(data);
           res.json(data);
       }
       

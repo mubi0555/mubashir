@@ -11,27 +11,17 @@ var R=new Restaurant({
     name: req.body.Restaurantname,
     address: req.body.address,
     phone: req.body.phone,
-    typeofcuisine: req.body.cuisine,
-    tags: req.body.tags,
-    // hoursofoperation: req.body.hoursofoperation
+    timings: req.body.timings,
 });
-
-
-
     R.save(function(error,data){
-
-
         if(error){
             res.status(400).json();
         }
         else{
              console.log("Restaurant Created");
             res.json(data);
-           
         }
-    })
-
-
+    });
 });
 
 RestaurantRouter.get('/findRestaurant/:name',function(req,res){

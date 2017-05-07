@@ -1,11 +1,26 @@
-<div class="CreateResturantForm"  >
-    <form >
-     Restaurant : <input type="text" ng-model="restaurant"/><br>
-     Address : <input type="text" ng-model="address"/><br>
-     Phone Number: <input type="text" ng-model="phone"/><br>
-     <!--Restaurant Name: <input type="text" ng-model="restaurant"/><br>-->
-     Tags : <input type="text" ng-model="tags"/><br>
-     Type Of Cuisine: <input type="text" ng-model="typeofcuisine"/><br>
-    <button ng-click="AddRetaurant()">Create</button><br>
-    </form>
+<div class="container">
+  <div class="row">
+	<h1 style="text-align: center;">Restaurant Form</h1>
+		<div style="width: 30%; margin: 0 auto;">
+			<form  >
+			   <div  class="form-group">
+			   		  <label>Restaurant Name</label>
+                          <input class="form-control" type="text" ng-model="restaurant"  placeholder="e.g Optp">
+			   </div>
+			    <div class="form-group">
+                    <label>Address</label>
+				       <input class="form-control" type="text" ng-model="address" placeholder="e.g Halifax near ">
+				</div>	
+                <div class="form-group">
+                    <label>Phone Number</label>
+				       <input class="form-control" type="text" ng-model="phone" placeholder="e.g +1234213">
+				</div>	
+                <div class="form-group">
+                    <label>Timings</label>
+				       <input class="form-control" type="text" ng-model="serving" placeholder="e.g 11 a.m - 9 p.m ">
+				</div>			
+				      <button ng-click="AddRestaurant()">Create</button>
+			</form>
+		</div>		
+  </div>
 </div>
