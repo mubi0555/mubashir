@@ -146,7 +146,12 @@ $scope.AddRestaurant=function(){
            MenuData.createMenu(data)
             .then(function(response){
                 console.log(response);
-            $location.path('/createMenu');
+                    $scope.menu='';
+                    $scope.price='';
+                    $scope.catagory='';
+                    $scope.serving='';
+                    $scope.quantity='';
+                    $scope.details='';
             console.log("Saved");
             },function(err){
                 console.log(err);
