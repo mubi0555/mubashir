@@ -7,10 +7,10 @@ var RestaurantSchema=new Schema({
     address: {type: String, unique: true},
     phone: String,
     timings: String,
-    menu: [{
-        type: mongooose.Schema.Types.ObjectId,
-        ref: 'menu'
-    }]
+    // menu: [{
+    //     type: mongooose.Schema.Types.ObjectId,
+    //     ref: 'menu'
+    // }]
 });
 RestaurantSchema.plugin(textSearch);
 RestaurantSchema.index({restaurant:'text'});

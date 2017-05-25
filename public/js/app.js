@@ -31,8 +31,8 @@ app.factory('RestaurantServices',['$http',function($http){
      RestaurantData.createRestaurant=function(data){
          return $http.post(restaurantUrl+'createRestaurant',data);
      }
-     RestaurantData.getAllRestaurant=function(name){
-         return $http.get(restaurantUrl+'findRestaurant/:'+name);
+     RestaurantData.getAllRestaurant=function(){
+         return $http.get(restaurantUrl+'findRestaurant');
      }
      return RestaurantData;
 }]);
@@ -90,8 +90,18 @@ app.controller('SignUp',function(LoginService,$scope){
 
 app.controller('MenuCtrl',function($scope,MenuData,$routeParams,$location,RestaurantServices){
 
+    
+
 $scope.AllMenus=[];
 $scope.AllRestaurants=[];
+
+RestaurantServices.getAllRestaurant()
+.then(function(res){
+$scope.AllRestaurants=res.data;
+console.log($scope.AllRestaurants);
+},function(err){
+    console.log(err);
+});
     $scope.GO=function(){
         MenuData.getAllMenus($scope.Search)
         .then(function(res){
@@ -118,7 +128,7 @@ $scope.AddRestaurant=function(){
         .then(function(res){
             RestaurantServices.restaurantId=res.data._id;
             console.log(RestaurantServices.restaurantId);
-            $location.path('/createMenu');
+            $location.path('/home');
             console.log(res.data);
         },function(err){
             console.log(err);
@@ -139,12 +149,13 @@ $scope.AddRestaurant=function(){
          catagory:$scope.catagory,
           serving:$scope.serving,
            quantity: $scope.quantity,
-            details:  $scope.details,
+            // details:  $scope.details,
             ID: RestaurantServices.restaurantId
     };
 
            MenuData.createMenu(data)
             .then(function(response){
+                console.log(data);
                 console.log(response);
                     $scope.menu='';
                     $scope.price='';

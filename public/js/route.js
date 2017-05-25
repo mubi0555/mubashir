@@ -21,6 +21,10 @@ var app=angular.module('MyApp');
             templateUrl: 'views/pages/updatemenu.html',
             controller: 'UpdateCtrl'
         })
+        .when('/showRestaurant',{
+            templateUrl: 'views/pages/showRestaurant.html',
+            controller: 'MenuCtrl'
+        })
         .when('/home',{
             templateUrl: 'views/pages/home.html',
             controller: 'MenuCtrl'

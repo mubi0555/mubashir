@@ -11,17 +11,7 @@ MenuRouter.get('/findmenu/:name',function(req,res){
         else{
             res.json(data);
         }
-    });
-//  Restaurants.find({$text:{$search: req.params.restaurant}},function(err,data){
-//       if(err){
-//           res.status(400).json();
-//       }
-//       else{
-//           res.json();
-//       }
-//     });
-    
-   
+    });   
     
 });
 
@@ -31,8 +21,9 @@ MenuRouter.post('/addmenu',function(req,res){
       menu: req.body.menu,
       price:parseInt(req.body.price),
       catagory: req.body.catagory,
-      restaurant: req.body.ID,
-      serving: req.body.serving
+       restaurant: req.body.ID,
+      serving: req.body.serving,
+      quantity: req.body.quantity
       
     });
 

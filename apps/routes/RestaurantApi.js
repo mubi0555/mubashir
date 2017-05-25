@@ -8,7 +8,7 @@ RestaurantRouter.post('/createRestaurant',function(req,res){
 
 var R=new Restaurant({
 
-    name: req.body.Restaurantname,
+    restaurant: req.body.restaurant,
     address: req.body.address,
     phone: req.body.phone,
     timings: req.body.timings,
@@ -24,8 +24,8 @@ var R=new Restaurant({
     });
 });
 
-RestaurantRouter.get('/findRestaurant/:name',function(req,res){
-     Restaurant.findOne(function(error,data){
+RestaurantRouter.get('/findRestaurant',function(req,res){
+     Restaurant.find(function(error,data){
          if(error){
              res.status(400).json(err);
          }
