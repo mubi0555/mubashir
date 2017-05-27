@@ -4,7 +4,7 @@ var Schema=mongoose.Schema;
 var MenuSchema=new Schema({
     
     menu : String,
-    glutenfree:{
+    glutinfree:{
       type: String,
       enum: ['Yes','No']
     },

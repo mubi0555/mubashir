@@ -75,6 +75,49 @@ RestaurantRouter.put('/updateRestaurant',function(req,res){
 
 });
 
+RestaurantRouter.put('/updaterestaurant',function(req,res){
 
+      Restaurant.findById(req.body._id,function(err,data){
+           if(err){
+               res.status(400).json(err);
+           }
+           else{
+               data.restaurant=req.body.restaurant;
+               data.address=req.body.address;
+               data.phone=req.body.phone;
+               data.timings=req.body.timings;
+                     data.save(function(err,updatedData){
+      if(err){
+          res.status(400).json(err);
+
+      }
+      else{
+          console.log(data);
+          res.json(updatedData);
+      }
+  });
+           }
+
+      });
+});
+RestaurantRouter.get('/searchRestaurant:id',function(req,res){
+    Restaurant.findById(req.params.id,function(err,data){
+        if(err){
+            res.status(400).json();
+        }
+        res.json(data);
+    })
+});
+
+RestaurantRouter.delete('/deleteRestaurants/:id',function(req,res){
+ Restaurant.remove({_id: req.params.id},function(err,data){
+     if(err){
+         res.status(400).json();
+     }
+     else{
+         console.log("Restaurant deleted");
+     }
+ });
+});
 
 module.exports=RestaurantRouter;

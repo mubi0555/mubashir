@@ -13,9 +13,9 @@ var app=angular.module('MyApp');
 			templateUrl: 'views/pages/createMenu.html',
 			controller: 'MenuCtrl'
 		})
-        .when('/showmenu', {
+        .when('/showmenu/:restaurant/:id', {
 			templateUrl: 'views/pages/showmenu.html',
-			controller: 'MenuCtrl'
+			controller: 'ShowMenuCtrl'
 		})
         .when('/updatemenu/:id',{
             templateUrl: 'views/pages/updatemenu.html',
@@ -36,6 +36,10 @@ var app=angular.module('MyApp');
         .when('/showRestaurant',{
             templateUrl: 'views/pages/showRestaurant.html',
             controller: 'MenuCtrl'
+        })
+        .when('updateRestaurant/:id',{
+            templateUrl: 'views/pages/updateRestaurant.html',
+            controller: 'UpdateCtrl'
         })
         .otherwise("/home")
         $locationProvider.html5Mode(true);

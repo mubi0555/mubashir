@@ -23,8 +23,9 @@ MenuRouter.post('/addmenu',function(req,res){
       catagory: req.body.catagory,
        restaurant: req.body.ID,
       serving: req.body.serving,
-      quantity: req.body.quantity
-      
+      quantity: req.body.quantity,
+      details: req.body.details,
+      glutinfree: req.body.glutinfree
     });
 
 
@@ -71,7 +72,7 @@ MenuRouter.put('/updatemenu',function(req,res){
 });
 
 MenuRouter.get('/searchmenu/:id',function(req,res){
-    Menu.findById(req.params.id,function(err,data){
+    Menu.find({restaurant: req.params.id},function(err,data){
          if(err){
              res.status(400).json(err);
          }

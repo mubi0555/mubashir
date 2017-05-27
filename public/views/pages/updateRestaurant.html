@@ -1,0 +1,37 @@
+<div class="container">
+<div class="row">
+<div class="col-xs-12">
+ <div class="modal" id="UpdateRestaurantModal">
+                <div class="modal-dialog">
+                     <div class="modal-content">
+                         <div class="modal-header">
+                            <button class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Update Restaurant</h4>
+                         </div>
+                         <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                   Restaurant <input class="form-control" placeholder="e.g Burger" type="text" ng-model="SearchRestaurant.restaurant"/>
+                                </div> 
+                                <div class="form-group">
+                                   Address <input class="form-control" placeholder="e.g $150" type="text" ng-model="SearchRestaurant.address"/>
+                                </div>  
+                                <div class="form-group">
+                                  Phone Number <input class="form-control" placeholder="e.g Italian" type="text" ng-model="SearchRestaurant.phone"/>
+                                </div> 
+                                <div class="form-group">
+                                   Timings <input class="form-control" placeholder="e.g 2 or 3" type="text" ng-model="SearchRestaurant.timings"/>
+                                </div>  
+                            </form>
+                         </div>
+                               <div class="modal-footer">
+                                   <button class="btn btn-primary" ng-click="UpdateRest(SearchRestaurant._id)">Add Menu</button>
+                                   <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                               </div>
+                     </div>
+                </div>
+
+            </div>
+</div>
+</div>
+</div>
