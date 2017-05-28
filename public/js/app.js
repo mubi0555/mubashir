@@ -21,6 +21,9 @@ MenuData.deleteMenu=function(id){
 MenuData.searchMenu=function(id){
     return $http.get(url+'searchmenu/'+id);
 }
+MenuData.searchOneMenu=function(id){
+    return $http.get(url+'SearchOneMenu/'+id);
+}
 return MenuData;
 }]);
 app.factory('RestaurantServices',['$http',function($http){
@@ -170,21 +173,12 @@ if (index > -1) {
     
 }
 
-$scope.Updatepage=function(id){
-
-// var modalInstance = $modal.open({
-//           templateUrl: 'views/pages/updateRestaurant.html',
-//           controller: 'supportInstanceCtrl'
-//         });
-
-}
-$scope.UpdateRestautantPage=function(data){
-
+$scope.UpdateRestautantPage=function(id){
     $location.path('/updateRestaurant/'+id);
 }
 
 $scope.ShowMenuPage=function(Restaurant){
-    $location.path('/showmenu/'+Restaurant.restaurant+'/'+Restaurant._id);
+    $location.path('/showmenu/'+Restaurant._id);
 }
 
 });
@@ -262,16 +256,52 @@ if (index > -1) {
 
 }
 
+$scope.UpdateMenuPAge=function(id,rest_id){
+
+    $location.path('/updatemenu/'+id+'/'+rest_id);
+    console.log(rest_id);
+}
+
 });
 
-app.controller('UpdateCtrl',function($scope,RestaurantServices,$routeParams,$location){
+app.controller('UpdateMenuCtrl',function($scope,MenuData,$routeParams,$location){
+  $scope.SearchMenu={};
+  var restaurant_id=$routeParams.rest_id;
+  SearchMenus($routeParams.id);
+  function SearchMenus(id){
+console.log($routeParams.id);
+    MenuData.searchOneMenu(id)
+    .then(function(res){
+        $scope.SearchMenu=res.data;
+      //  $scope.SearchMenu=restaurant_id;
+        console.log(res.data);
+    },function(err){
+        console.log(err);
+    });
+}
+
+  $scope.UpdateMenu=function(id){ 
+    MenuData.updatMenu($scope.SearchMenu)
+    .then(function(response){
+        $location.path('/showmenu/'+restaurant_id);
+        console.log(restaurant_id);
+        console.log(response.data);
+        
+        console.log('Data has been Updated');
+    },function(err){
+        console.log(err);
+    })
+}
+});
+app.controller('UpdateCtrl',function($scope,RestaurantServices,$routeParams,$location,MenuData){
   $scope.SearchRestaurant={};
+
 
 Search($routeParams.id);
 console.log($scope.RestaurantName);
 function Search(id){
 console.log($routeParams.id);
-    RestaurantServices.searchMenu(id)
+    RestaurantServices.searchRestaurant(id)
     .then(function(res){
         $scope.SearchRestaurant=res.data;
         console.log(res.data);
@@ -281,7 +311,7 @@ console.log($routeParams.id);
 }
 
    $scope.UpdateRest=function(id){ 
-    RestaurantServices.searchRestaurant($scope.SearchRestaurant)
+    RestaurantServices.updateRestaurant($scope.SearchRestaurant)
     .then(function(response){
         console.log(response.data);
         console.log('Restaurant has been Updated');

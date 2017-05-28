@@ -6,7 +6,7 @@ var MenuSchema=new Schema({
     menu : String,
     glutinfree:{
       type: String,
-      enum: ['Yes','No']
+      enum: ['Yes','No','yes','no']
     },
     price: Number,
     catagory: String,

@@ -1,10 +1,32 @@
-<div class="CreateMenuForm"  >
-    <form >
-     Menu : <input type="text" ng-model="SearchMenu.menu" /><br>
-     Price : <input type="text" ng-model="SearchMenu.price"/><br>
-     Catagory: <input type="text" ng-model="SearchMenu.catagory"/><br>
-     Restaurant Name: <input type="text" ng-model="SearchMenu.restaurant"/><br>
-    <button ng-click="UpdateMenu(SearchMenu._id)">Update</button><br>
+<div>
+  <h1 style="text-align: center;">Menu Form</h1>
+  <div style="width: 30%; margin: 0 auto;">
+    <form>
+      <div class="form-group">
+        Menu <input class="form-control" placeholder="e.g Burger" type="text" ng-model="SearchMenu.menu" />
+      </div>
+      <div class="form-group">
+        Price($) <input class="form-control" placeholder="e.g $150" type="text" ng-model="SearchMenu.price" />
+      </div>
+      <div class="form-group">
+        Catagory <input class="form-control" placeholder="e.g Italian" type="text" ng-model="SearchMenu.catagory" />
+      </div>
+      <div class="form-group">
+        Serving <input class="form-control" placeholder="e.g 2 or 3" type="text" ng-model="SearchMenu.serving" />
+      </div>
+      <div class="form-group">
+        Quantity <input class="form-control" placeholder="e.g Large/small" type="text" ng-model="SearchMenu.quantity" />
+      </div>
+      <div class="form-group">
+        <label>Glutin free</label>
+        <input class="form-control" type="text" ng-model="SearchMenu.glutinfree" placeholder="e.g Yes/No">
+      </div>
+      <div class="form-group">
+        <label>Details</label>
+        <input class="form-control" type="text" ng-model="SearchMenu.details" placeholder="e.g">
+      </div>
+      <button class="btn btn-primary" ng-click="UpdateMenu(SearchMenu._id)">Update</button>
     </form>
+  </div>
 
 </div>

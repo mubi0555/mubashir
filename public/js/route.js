@@ -13,13 +13,13 @@ var app=angular.module('MyApp');
 			templateUrl: 'views/pages/createMenu.html',
 			controller: 'MenuCtrl'
 		})
-        .when('/showmenu/:restaurant/:id', {
+        .when('/showmenu/:id', {
 			templateUrl: 'views/pages/showmenu.html',
 			controller: 'ShowMenuCtrl'
 		})
-        .when('/updatemenu/:id',{
+        .when('/updatemenu/:id/:rest_id',{
             templateUrl: 'views/pages/updatemenu.html',
-            controller: 'UpdateCtrl'
+            controller: 'UpdateMenuCtrl'
         })
         .when('/showRestaurant',{
             templateUrl: 'views/pages/showRestaurant.html',
@@ -31,10 +31,6 @@ var app=angular.module('MyApp');
         })
         .when('/createRestaurant',{
             templateUrl: 'views/pages/createRestaurant.html',
-            controller: 'MenuCtrl'
-        })
-        .when('/showRestaurant',{
-            templateUrl: 'views/pages/showRestaurant.html',
             controller: 'MenuCtrl'
         })
         .when('updateRestaurant/:id',{

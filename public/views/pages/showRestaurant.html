@@ -22,7 +22,7 @@
                     <label>Timings</label>
 				       <input class="form-control" type="text" ng-model="timings" placeholder="e.g 11 a.m - 9 p.m ">
 				</div>			
-				      <button ng-click="AddRestaurant()">Add Restaurant</button>
+				      <button class="btn btn-primary" ng-click="AddRestaurant()">Add Restaurant</button>
 			</form>
 		</div>	
 
@@ -53,7 +53,7 @@
                              {{Restaurant.timings}}
                            </td>
                            <td>
-                             <button class="btn btn-primary btn-sm"  data-toggle="modal" style="background-color: green" >Edit </button>
+                             <button class="btn btn-primary btn-sm" ng-click="UpdateRestautantPage(Restaurant._id)" data-toggle="modal" style="background-color: green" >Edit </button>
                            </td>
                            <td>
                               <button ng-click="DeleteRestaurant(Restaurant._id,Restaurant)" style="background-color: red" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#DeleteRestaurant">Remove </button>

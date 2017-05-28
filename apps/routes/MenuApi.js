@@ -50,10 +50,14 @@ MenuRouter.put('/updatemenu',function(req,res){
                res.status(400).json(err);
            }
            else{
-               data.menu=req.body.menu;
-               data.price=req.body.price;
-               data.catagory=req.body.catagory;
-               data.restaurant=req.body.restaurant;
+               data.menu= req.body.menu,
+      data.price=parseInt(req.body.price),
+      data.catagory= req.body.catagory,
+       data.restaurant= req.body.ID,
+      data.serving= req.body.serving,
+      data.quantity= req.body.quantity,
+      data.details= req.body.details,
+      data.glutinfree= req.body.glutinfree
                      data.save(function(err,updatedData){
       if(err){
           res.status(400).json(err);
@@ -75,9 +79,23 @@ MenuRouter.get('/searchmenu/:id',function(req,res){
     Menu.find({restaurant: req.params.id},function(err,data){
          if(err){
              res.status(400).json(err);
+             console.log('Error');
          }
          res.json(data);
-         console.log('Searched');
+         console.log('Searched'+data);
+         
+     });
+});
+
+MenuRouter.get('/SearchOneMenu/:id',function(req,res){
+Menu.findById({_id: req.params.id},function(err,data){
+         if(err){
+             res.status(400).json(err);
+             console.log('Error');
+         }
+         res.json(data);
+         console.log('Searched'+data);
+         
      });
 });
 MenuRouter.delete('/deletemenu/:id',function(req,res){
