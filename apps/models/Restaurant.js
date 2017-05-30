@@ -5,7 +5,7 @@ var RestaurantSchema=new Schema({
 
     restaurant: String,
     address: {type: String, unique: true},
-    phone: String,
+    phone: Number,
     timings: String,
     // menu: [{
     //     type: mongooose.Schema.Types.ObjectId,

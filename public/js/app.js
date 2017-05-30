@@ -137,6 +137,12 @@ $scope.AddRestaurant=function(){
         phone: $scope.phone,
         timings: $scope.timings,
     }
+
+if($scope.restaurant==''||$scope.address==''||$scope.phone==''||$scope.timings==''){
+    alert('Please fill all fields');
+    return false;
+}
+
         RestaurantServices.createRestaurant(data)
         .then(function(res){
             RestaurantServices.restaurantId=res.data._id;
@@ -174,18 +180,60 @@ if (index > -1) {
 }
 
 $scope.UpdateRestautantPage=function(id){
-    $location.path('/updateRestaurant/'+id);
+    $location.path('/UpdateRest/'+id);
 }
 
 $scope.ShowMenuPage=function(Restaurant){
-    $location.path('/showmenu/'+Restaurant._id);
+    $location.path('/showmenu/'+Restaurant.restaurant+'/'+Restaurant._id);
 }
 
 });
 
-app.controller('ShowMenuCtrl',function($scope,MenuData,RestaurantServices,$routeParams,$location){
+app.controller('ShowMenuCtrl',function($scope,$rootScope,MenuData,RestaurantServices,$routeParams,$location){
 $scope.getMenus={};
-$scope.RestaurantName=$routeParams.restaurant;
+$scope.getRestaurant={};
+$scope.searchRest={};
+$scope.restName=$routeParams.restaurant;
+$rootScope.RestaurantName=$routeParams.restaurant;
+console.log($scope.restName);
+console.log($routeParams.id);
+ var index_rest;
+RestaurantServices.searchRestaurant($routeParams.id)
+.then(function(res){
+    $scope.searchRest=res.data;
+    console.log($scope.searchRest);
+},function(err){
+console.log(err);
+});
+
+var index_rest;
+RestaurantServices.getAllRestaurant()
+.then(function(res){
+$scope.getRestaurant=res.data;
+index_rest=arrayObjectIndexOf($scope.getRestaurant,$scope.searchRest);
+$scope.searchRest=res.data[index_rest];
+console.log(res.data);
+
+  console.log(index_rest);
+
+console.log($scope.getRestaurant);
+console.log('Restaurants get');
+},function(err){
+    console.log(err);
+});
+
+function arrayObjectIndexOf(getRestaurant,searchRest){
+    for(var i = 0; i < getRestaurant.length; i++){
+        if(angular.equals(getRestaurant[i], searchRest)){
+            return i;
+        }
+    };
+    return -1;
+}
+
+
+console.log($scope.getRestaurant);
+
     $scope.menu='';
     $scope.price='';
     $scope.catagory='';
@@ -204,6 +252,13 @@ $scope.RestaurantName=$routeParams.restaurant;
              glutinfree: $scope.glutinfree,
             ID: $routeParams.id
     };
+    if($scope.menu==''|| $scope.price==''|| $scope.catagory==''|| $scope.serving=='' || $scope.quantity==''||$scope.glutinfree==''
+    
+    || $scope.details==''
+    ){
+        alert('Please Fill all the fields');
+        return false;
+    }
 
            MenuData.createMenu(data)
             .then(function(response){
@@ -264,29 +319,36 @@ $scope.UpdateMenuPAge=function(id,rest_id){
 
 });
 
-app.controller('UpdateMenuCtrl',function($scope,MenuData,$routeParams,$location){
+app.controller('UpdateMenuCtrl',function($scope,MenuData,$routeParams,$location,$rootScope){
+ //   $scope.RestName=$rootScope.RestaurantName;
   $scope.SearchMenu={};
   var restaurant_id=$routeParams.rest_id;
+  console.log(restaurant_id);
   SearchMenus($routeParams.id);
   function SearchMenus(id){
 console.log($routeParams.id);
     MenuData.searchOneMenu(id)
     .then(function(res){
         $scope.SearchMenu=res.data;
-      //  $scope.SearchMenu=restaurant_id;
-        console.log(res.data);
     },function(err){
         console.log(err);
     });
 }
 
+
+
   $scope.UpdateMenu=function(id){ 
+if($scope.SearchMenu.menu==''|| $scope.SearchMenu.price==''|| $scope.SearchMenu.catagory==''||
+$scope.SearchMenu.quantity==''|| $scope.SearchMenu.glutinfree==''
+){
+    alert('Please fill all fields');
+    return false;
+}
+
+
     MenuData.updatMenu($scope.SearchMenu)
     .then(function(response){
-        $location.path('/showmenu/'+restaurant_id);
-        console.log(restaurant_id);
-        console.log(response.data);
-        
+        $location.path('/showmenu/'+$rootScope.RestaurantName+'/'+restaurant_id);
         console.log('Data has been Updated');
     },function(err){
         console.log(err);
@@ -309,10 +371,17 @@ console.log($routeParams.id);
         console.log(err);
     });
 }
-
    $scope.UpdateRest=function(id){ 
+ if($scope.SearchRestaurant.restaurant==''||$scope.SearchRestaurant.address==''||
+$scope.SearchRestaurant.phone=='' || $scope.SearchRestaurant.timings==''
+){
+    alert('Please fill all fields');
+    return false;
+}
+ console.log($scope.SearchRestaurant.restaurant+':'+$scope.SearchRestaurant.timings);
     RestaurantServices.updateRestaurant($scope.SearchRestaurant)
     .then(function(response){
+        $location.path('/showRestaurant');
         console.log(response.data);
         console.log('Restaurant has been Updated');
     },function(err){

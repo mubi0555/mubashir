@@ -10,7 +10,7 @@ var R=new Restaurant({
 
     restaurant: req.body.restaurant,
     address: req.body.address,
-    phone: req.body.phone,
+    phone: parseInt(req.body.phone),
     timings: req.body.timings,
 });
     R.save(function(error,data){
@@ -39,39 +39,10 @@ RestaurantRouter.get('/searchRestaurant/:id',function(req,res){
              res.status(400).json(err);
          }
          res.json(data);
+         console.log(data);
          console.log('Searched');
      });
 
-
-});
-
-RestaurantRouter.put('/updateRestaurant',function(req,res){
-
-      Restaurant.findById(req.body._id,function(err,data){
-           if(err){
-               res.status(400).json(err);
-           }
-           else{
-               data.name=req.body.Restaurantname;
-               data.address=req.body.address;
-               data.phone=req.body.phone;
-               data.typeofcuisine=req.body.cuisine;
-               data.tags=req.body.tags;
-               data.hoursofoperation=req.body.hoursofoperation;
-                     data.save(function(err,updatedData){
-      if(err){
-          res.status(400).json(err);
-
-      }
-      else{
-          console.log(data);
-          res.json(updatedData);
-      }
-  });
-           }
-
-      });
-     
 
 });
 
@@ -81,10 +52,12 @@ RestaurantRouter.put('/updaterestaurant',function(req,res){
            if(err){
                res.status(400).json(err);
            }
+           
            else{
+               
                data.restaurant=req.body.restaurant;
                data.address=req.body.address;
-               data.phone=req.body.phone;
+               data.phone=parseInt(req.body.phone);
                data.timings=req.body.timings;
                      data.save(function(err,updatedData){
       if(err){

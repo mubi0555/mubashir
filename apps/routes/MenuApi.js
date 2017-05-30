@@ -53,7 +53,7 @@ MenuRouter.put('/updatemenu',function(req,res){
                data.menu= req.body.menu,
       data.price=parseInt(req.body.price),
       data.catagory= req.body.catagory,
-       data.restaurant= req.body.ID,
+       data.restaurant= req.body.restaurant,
       data.serving= req.body.serving,
       data.quantity= req.body.quantity,
       data.details= req.body.details,
