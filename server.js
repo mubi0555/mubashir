@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose =  require('mongoose');
 var morgan = require('morgan'); 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8000;
 mongoose.connect('mongodb://heroku:fzUNhvJzxmbYL2e9suuYhcnBjZkDBbaGBlABlqJKnGYGPl4PFgyEAe53dNFFgnVBnMBib8SMlntoo0C4TkLTcA@candidate.45.mongolayer.com:11331,candidate.42.mongolayer.com:10693/app65734096');
 app.use(bodyParser.urlencoded({extended: true})
 );

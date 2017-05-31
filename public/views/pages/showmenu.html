@@ -18,9 +18,11 @@
       <div class="form-group">
         Quantity <input class="form-control" placeholder="e.g Large/small" type="text" ng-model="quantity" />
       </div>
+      Gluten Free
       <div class="radio">
-       Glutinfree<input class="form-control" placeholder="e.g Yes/No" type="text" ng-model="glutinfree"/>
-      </div>
+      <label><input type="radio" ng-model="glutinfree" value="Yes">Yes</label>
+      <label><input type="radio" ng-model="glutinfree" value="No">No</label>
+    </div>
       <div class="form-group">
         <label>Details</label>
         <input class="form-control" type="text" ng-model="details" placeholder="e.g">
