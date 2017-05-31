@@ -228,7 +228,7 @@ function arrayObjectIndexOf(getRestaurant,searchRest){
             return i;
         }
     };
-    return -1;
+    
 }
 
 
