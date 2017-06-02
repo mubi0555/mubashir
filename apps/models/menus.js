@@ -6,13 +6,13 @@ var MenuSchema=new Schema({
     menu : String,
     glutinfree:{
       type: String,
-      enum: ['Yes','No','yes','no']
+      enum: ['Yes','No']
     },
-    price: Number,
-    catagory: String,
     serving: String,
     quantity: String,
-    details: String,
+    price: Number,
+    typesofcuisine: String,
+    catagory: String,
     restaurant: {
       type: mongoose.Schema.Types.ObjectId,
       ref : 'Restaurant'

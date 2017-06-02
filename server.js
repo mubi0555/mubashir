@@ -21,9 +21,11 @@ app.use(morgan('dev'));
 var UserRouter=require('./apps/routes/userRoute.js');
 var MenuRoutes=require('./apps/routes/MenuApi.js');
 var RestaurantRoutes=require('./apps/routes/RestaurantApi.js');
+var MenuDetailsRoutes=require('./apps/routes/menuDetailsApi.js');
 app.use('/Menus',MenuRoutes);
 app.use('/User',UserRouter);
 app.use('/Restaurant',RestaurantRoutes);
+app.use('/MenuDetails',MenuDetailsRoutes);
 app.get('/',function(req,res){
     res.sendFile(__dirname+"/public/views/pages/index.html");
 });

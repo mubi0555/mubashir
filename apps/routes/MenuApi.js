@@ -19,13 +19,9 @@ MenuRouter.post('/addmenu',function(req,res){
        console.log(req.body);
   var M=new Menu({
       menu: req.body.menu,
-      price:parseInt(req.body.price),
-      catagory: req.body.catagory,
+      price:parseFloat(req.body.price),
+      typesofcuisine: req.body.typesofcuisine,
        restaurant: req.body.ID,
-      serving: req.body.serving,
-      quantity: req.body.quantity,
-      details: req.body.details,
-      glutinfree: req.body.glutinfree
     });
 
 

@@ -1,0 +1,73 @@
+<div class="container">
+<h3 >Menu Details</h3>
+<form class="form-horizontal">
+<div class="form-group">
+<label class="control-label col-sm-2">Catagory:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="Eneter Catagory" ng-model="catagory">
+      </div>
+</div>
+<div class="form-group">
+<label class="control-label col-sm-2">Quantity:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="e.g Salmon 6pcs" ng-model="quantity">
+      </div>
+</div>
+<div class="form-group">
+<label class="control-label col-sm-2" >Serving:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="Small/Large" ng-model="serving">
+      </div>
+</div>
+<div class="form-group">
+<label class="control-label col-sm-2" >Gluten Free:</label>
+      <div class="radio">
+      <label ><input type="radio" ng-model="glutinfree" value="Yes">Yes</label>
+      <label><input type="radio" ng-model="glutinfree" value="No">No</label>
+    </div>
+</div>
+<div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button  class="btn btn-primary" ng-click="DetailMenu()">Add Details</button>
+        <button  class="btn btn-primary" ng-click="ShowMenu()">Show Details</button>
+      </div>
+    </div>
+</form>
+
+</div>
+
+<div class="container">
+<div class="row">
+<table class="table" ng-show="!(getMenuDetails=={})">
+<thead>
+        <tr>
+          <th>Menu Picture</th>
+          <th>Menu Item</th>
+          <th>Price</th>
+          <th>Type Of Cuisine</th>
+          <th>Gluten Free</th>
+          <th>Serving</th>
+          <th>Quantity</th>
+          <th>Catagory</th>
+        </tr>
+      </thead>
+
+      <tbody   >
+          <tr>
+            <td><img src="/views/images/burger.jpg" width="50" height="20" alt=""></td>
+             <td>{{getMenuDetails.menu}}</td>
+             <td>{{getMenuDetails.price}}</td>
+             <td>{{getMenuDetails.typesofcuisine}}</td>
+             <td>{{getMenuDetails.glutinfree}}</td>
+             <td>{{getMenuDetails.serving}}</td>
+            <td>{{getMenuDetails.quantity}}</td>
+            <td>{{getMenuDetails.catagory}}</td>
+          </tr>
+
+      </tbody>
+
+</table>
+
+</div>
+
+</div>
