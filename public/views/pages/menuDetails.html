@@ -1,33 +1,46 @@
-<div class="container">
-<h3 >Menu Details</h3>
+<div class="container" style="background-color: skyblue">
+<h3 style="text-align: center">Menu Details</h3>
 <form class="form-horizontal">
 <div class="form-group">
-<label class="control-label col-sm-2">Catagory:</label>
+<label class="control-label col-sm-4">Type Of Cuisine:</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" placeholder="Eneter Catagory" ng-model="catagory">
+        <input type="text" class="form-control" placeholder="e.g Arabic/Italian" ng-model="typesofcuisine">
       </div>
 </div>
 <div class="form-group">
-<label class="control-label col-sm-2">Quantity:</label>
+<label class="control-label col-sm-4">Quantity:</label>
       <div class="col-sm-4">
         <input type="text" class="form-control" placeholder="e.g Salmon 6pcs" ng-model="quantity">
       </div>
 </div>
 <div class="form-group">
-<label class="control-label col-sm-2" >Serving:</label>
+<label class="control-label col-sm-4" >Serving:</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" placeholder="Small/Large" ng-model="serving">
+        <input type="text" class="form-control" placeholder="e.g Small/Large" ng-model="serving">
       </div>
 </div>
 <div class="form-group">
-<label class="control-label col-sm-2" >Gluten Free:</label>
+<label class="control-label col-sm-4" >Some other details:</label>
+      <div class="col-sm-4">
+        <textarea type="text" class="form-control" placeholder="e.g Our Menu item is a new favorite in Halifax, Stop on in and give it a try!" ng-model="other_details"/>
+      </div>
+</div>
+<div class="form-group">
+<label class="control-label col-sm-4" >Gluten Free:</label>
       <div class="radio">
       <label ><input type="radio" ng-model="glutinfree" value="Yes">Yes</label>
       <label><input type="radio" ng-model="glutinfree" value="No">No</label>
     </div>
 </div>
+<div class="form-group">
+<label class="control-label col-sm-4" >Type of menu:</label>
+      <div class="radio">
+      <label ><input type="radio" ng-model="typeofmenu" value="Halal">Halal</label>
+      <label><input type="radio" ng-model="typeofmenu" value="Haram">Haram</label>
+    </div>
+</div>
 <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
+      <div class="col-sm-offset-4 col-sm-12">
         <button  class="btn btn-primary" ng-click="DetailMenu()">Add Details</button>
         <button  class="btn btn-primary" ng-click="ShowMenu()">Show Details</button>
       </div>
@@ -36,38 +49,65 @@
 
 </div>
 
+<div class="container" style="background-color: skyblue">
+<div class="row">
+<div class="col-lg-3 col-md-3" >
+  <img src="/views/images/burger.jpg"alt=""  border="5" style="height: 120px;border: 2px solid;border-radius: 25px;background-color: skyblue"></td> 
+</div>
+<div class="col-lg-6 col-md-6">
+<h3>{{getMenuDetails.menu}}</h3><br>
+<p>{{getMenuDetails.other_details}}</p>
+</div>
+<div class="col-lg-3 col-md-3">
+<h2 ng-show="showButton">${{getMenuDetails.price}}</h2>
+<button class="btn btn-primary" data-toggle="modal" data-target="#Details" ng-show="showButton" >Mor Details</button>
+</div>
+
+</div>
+
+</div>
+
 <div class="container">
 <div class="row">
-<table class="table" ng-show="!(getMenuDetails=={})">
+<div class="modal" id="Details" >
+<div class="modal-dialog" style="width: 60%">
+<div class="modal-content">
+<div class="modal-header">
+  <span>
+<button class="close" data-dismiss="modal">&times;</button>  
+<h3> Menu Details</h3></span>
+</div>
+<div class="modal-body">
+<table class="table table-striped">
 <thead>
         <tr>
-          <th>Menu Picture</th>
           <th>Menu Item</th>
-          <th>Price</th>
           <th>Type Of Cuisine</th>
           <th>Gluten Free</th>
           <th>Serving</th>
           <th>Quantity</th>
           <th>Catagory</th>
+          <th>Type Of menu</th>
         </tr>
-      </thead>
-
-      <tbody   >
-          <tr>
-            <td><img src="/views/images/burger.jpg" width="50" height="20" alt=""></td>
+</thead>
+<tbody>
+ <tr>
              <td>{{getMenuDetails.menu}}</td>
-             <td>{{getMenuDetails.price}}</td>
              <td>{{getMenuDetails.typesofcuisine}}</td>
              <td>{{getMenuDetails.glutinfree}}</td>
              <td>{{getMenuDetails.serving}}</td>
             <td>{{getMenuDetails.quantity}}</td>
             <td>{{getMenuDetails.catagory}}</td>
+            <td>{{getMenuDetails.typeofmenu}}</td>
           </tr>
-
-      </tbody>
-
+</tbody>
 </table>
-
 </div>
-
+<div class="modal-footer">
+<button class="btn btn-primary btn-sm" data-dismiss="modal">OK</button>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>

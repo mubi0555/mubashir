@@ -56,6 +56,9 @@ app.factory('RestaurantServices',['$http',function($http){
      RestaurantData.searchRestaurant=function(id){
          return $http.get(restaurantUrl+'searchRestaurant/'+id);
      }
+     RestaurantData.SearchRestaurant=function(id){
+         return $http.get(restaurantUrl+'SearchRestaurant/'+id);
+     }
      RestaurantData.updateRestaurant=function(data){
          return $http.put(restaurantUrl+'updaterestaurant',data);
      }
@@ -115,15 +118,38 @@ app.controller('SignUp',function(LoginService,$scope){
 
 app.controller('MenuCtrl',function($scope,MenuData,$routeParams,$location,RestaurantServices){
 
-    
-
+$scope.my_restaurant=[];
+$scope.TimingsArray={};
 $scope.AllMenus=[];
 $scope.AllRestaurants=[];
+$scope.myobject={
+    monday: '',
+    tuesday: '',
+    wednesday: '',
+    thursday: '',
+    friday:'',
+    saturday:'',
+    sunday: ''
+}
+$scope.timingfunc=function(){
+
+console.log($scope.myobject);
+}
+
+$scope.My_Restaurant=function(id){
+RestaurantServices.SearchRestaurant(id)
+.then(function(res){
+$scope.my_restaurant=res.data;
+console.log($scope.my_restaurant.timings);
+},function(err){
+    console.log(err);
+});
+}
 
 RestaurantServices.getAllRestaurant()
 .then(function(res){
 $scope.AllRestaurants=res.data;
-console.log(res.data);
+console.log($scope.AllRestaurants.timings);
 },function(err){
     console.log(err);
 });
@@ -140,7 +166,6 @@ console.log(res.data);
 $scope.restaurant='';
 $scope.address='';
 $scope.phone='';
-$scope.timings='';
 $scope.restaurantID='';
 $scope.AddRestaurant=function(){
      
@@ -148,14 +173,21 @@ $scope.AddRestaurant=function(){
         restaurant: $scope.restaurant,
         address: $scope.address,
         phone: $scope.phone,
-        timings: $scope.timings,
+        timings: $scope.myobject,
     }
 
-if($scope.restaurant==''||$scope.address==''||$scope.phone==''||$scope.timings==''){
+if($scope.restaurant==''||$scope.address==''||$scope.phone==''){
     alert('Please fill all fields');
     return false;
 }
+if($scope.myobject.monday==''|| $scope.myobject.tuesday==''||$scope.myobject.wednesday==''||$scope.myobject.thursday==''
+|| $scope.myobject.friday==''|| $scope.myobject.saturday==''||$scope.myobject.sunday==''){
 
+alert('Please fill timings');
+}
+    
+
+else{
         RestaurantServices.createRestaurant(data)
         .then(function(res){
             RestaurantServices.restaurantId=res.data._id;
@@ -171,7 +203,7 @@ $scope.timings='';
         });
 
 }
-
+}
     
 
     var index;
@@ -205,23 +237,29 @@ $scope.ShowMenuPage=function(Restaurant){
 
 app.controller('menuDetailCtrl',function($scope,$routeParams,$location,DetailsData ){
     $scope.getMenuDetails={};
-    $scope.catagory='';
+    $scope.typesofcuisine='';
     $scope.serving='';
     $scope.quantity='';
     $scope.glutinfree='';
+    $scope.typeofmenu='';
+    $scope.other_details='';
+   $scope.checkSearch={};
 
 
-$scope.checkSearch={};
+$scope.showButton=false;
+console.log($scope.getMenuDetails);
 $scope.ShowMenu=function(){
 DetailsData.search($routeParams.id)
 .then(function(response){
     $scope.checkSearch=response.data;
+    console.log($scope.checkSearch);
 if($scope.checkSearch.catagory==null|| $scope.checkSearch.serving==null||$scope.checkSearch.glutinfree==null||
-$scope.checkSearch.quantity==null){
+$scope.checkSearch.quantity==null || $scope.checkSearch.typeofmenu==null||$scope.other_details==null){
     alert('Please add detail first');
 }
 else{
  $scope.getMenuDetails=response.data;
+ $scope.showButton=true;
 }
     
   
@@ -237,12 +275,14 @@ $scope.checkData={};
     $scope.DetailMenu=function(){
 
         var data={
-            catagory: $scope.catagory,
+            typesofcuisine: $scope.typesofcuisine,
             serving: $scope.serving,
             quantity: $scope.quantity,
-            glutinfree: $scope.glutinfree
+            glutinfree: $scope.glutinfree,
+            typeofmenu:$scope.typeofmenu,
+            other_details:$scope.other_details
         }
-        if($scope.catagory==''|| $scope.serving==''||$scope.quantity==''||$scope.glutinfree==''){
+        if($scope.typesofcuisine==''|| $scope.serving==''||$scope.quantity==''||$scope.glutinfree==''||$scope.typeofmenu==''){
             alert('Please fill all the fields');
             return false
         }
@@ -251,27 +291,31 @@ $scope.checkData={};
             $scope.checkData=res.data;
             console.log($scope.checkData);
             if($scope.checkData.glutinfree==null||$scope.checkData.serving==null||$scope.checkData.quantity==null||
-            $scope.checkData.catagory==null
+            $scope.checkData.typesofcuisine==null || $scope.checkData.other_details==null || $scope.checkData.typeofmenu==null
             ){
  
     DetailsData.create($routeParams.id,data)
       .then(function(res){
            console.log(res.data);
            alert('You have successfully added details');
-           $scope.catagory='';
+           $scope.typesofcuisine='';
            $scope.serving='';
            $scope.quantity='';
            $scope.glutinfree='';
+           $scope.typeofmenu=''
+           $scope.other_details='';
       },function(err){
           console.log(err);
       });
             }
             else{
                 alert('You have already added details');
-                $scope.catagory='';
+                $scope.typesofcuisine='';
            $scope.serving='';
            $scope.quantity='';
            $scope.glutinfree='';
+           $scope.typeofmenu='';
+           $scope.other_details='';
             }
 
         },function(error){
@@ -338,15 +382,15 @@ console.log($scope.getRestaurant);
 
     $scope.menu='';
     $scope.price='';
-    $scope.typesofcuisine='';
+    $scope.catagory='';
     $scope.ID='';
     $scope.AddMenu=function(){
     var data={menu: $scope.menu,
          price:$scope.price,
-         typesofcuisine:$scope.typesofcuisine,
+         catagory:$scope.catagory,
             ID: $routeParams.id
     };
-    if($scope.menu==''|| $scope.price==''|| $scope.typesofcuisine==''){
+    if($scope.menu==''|| $scope.price==''|| $scope.catagory==''){
         alert('Please Fill all the fields');
         return false;
     }
@@ -358,7 +402,7 @@ console.log($scope.getRestaurant);
                 console.log(response);
                     $scope.menu='';
                     $scope.price='';
-                    $scope.typesofcuisine='';
+                    $scope.catagory='';
             console.log("Saved");
             
             },function(err){
@@ -425,8 +469,7 @@ console.log($routeParams.id);
 
 
   $scope.UpdateMenu=function(id){ 
-if($scope.SearchMenu.menu==''|| $scope.SearchMenu.price==''|| $scope.SearchMenu.catagory==''||
-$scope.SearchMenu.quantity==''|| $scope.SearchMenu.glutinfree==''
+if($scope.SearchMenu.menu==''|| $scope.SearchMenu.price==''|| $scope.SearchMenu.catagory==''
 ){
     alert('Please fill all fields');
     return false;

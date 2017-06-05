@@ -6,24 +6,10 @@
         Menu <input class="form-control" placeholder="e.g Burger" type="text" ng-model="SearchMenu.menu" />
       </div>
       <div class="form-group">
-        Price($) <input class="form-control" placeholder="e.g 150" type="number" ng-model="SearchMenu.price" />
+        Price($) <input class="form-control" placeholder="e.g 5.6"  type="number" ng-model="SearchMenu.price" step="0.01"/>
       </div>
       <div class="form-group">
         Catagory <input class="form-control" placeholder="e.g Italian" type="text" ng-model="SearchMenu.catagory" />
-      </div>
-      <div class="form-group">
-        Serving <input class="form-control" placeholder="e.g 2 or 3" type="text" ng-model="SearchMenu.serving" />
-      </div>
-      <div class="form-group">
-        Quantity <input class="form-control" placeholder="e.g Large/small" type="text" ng-model="SearchMenu.quantity" />
-      </div>
-      <div class="form-group">
-        <label>Glutin free</label>
-        <input class="form-control" type="text" ng-model="SearchMenu.glutinfree" placeholder="e.g Yes/No">
-      </div>
-      <div class="form-group">
-        <label>Details</label>
-        <input class="form-control" type="text" ng-model="SearchMenu.details" placeholder="e.g">
       </div>
       <button class="btn btn-primary" ng-click="UpdateMenu(SearchMenu._id)">Update</button>
     </form>

@@ -9,10 +9,12 @@ if(err){
     response.status(400).json(err);
 }
 else{
-    data.catagory=request.body.catagory,
+    data.typesofcuisine=request.body.typesofcuisine,
     data.quantity=request.body.quantity,
     data.serving=request.body.serving,
-    data.glutinfree=request.body.glutinfree
+    data.glutinfree=request.body.glutinfree,
+    data.typeofmenu=request.body.typeofmenu,
+    data.other_details=request.body.other_details
 
     data.save(function(err,data){
         if(err){

@@ -4,31 +4,45 @@
 <div class="container">
     <div class="row">
 <h1 style="text-align: center;">Restaurant Form</h1>
-		<div style="width: 30%; margin: 0 auto;">
-			<form  >
+		<div style="width: 100%">
+			<form class="form-horizontal"  >
 			   <div  class="form-group">
-			   		  <label>Restaurant Name</label>
+			   		  <label class="control-label col-sm-4">Restaurant Name</label>
+               <div class="col-sm-5">
                           <input class="form-control" type="text" ng-model="restaurant"  placeholder="e.g Optp">
+               </div>
 			   </div>
 			    <div class="form-group">
-                    <label>Address</label>
-				       <input class="form-control" type="text" ng-model="address" placeholder="e.g Halifax near ">
+                    <label class="control-label col-sm-4">Address</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" ng-model="address" placeholder="e.g Halifax near ">
+                    </div>
 				</div>	
                 <div class="form-group">
-                    <label>Phone Number</label>
+                    <label class="control-label col-sm-4">Phone Number</label>
+                    <div class="col-sm-5">
 				       <input class="form-control" type="number" ng-model="phone" placeholder="e.g +1678231">
+                    </div>
 				</div>	
                 <div class="form-group">
-                    <label>Timings</label>
-				       <input class="form-control" type="text" ng-model="timings" placeholder="e.g 11 a.m - 9 p.m ">
+                    <label class="control-label col-sm-4">Timings</label>
+                    <div class="col-sm-5">
+				    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Addtimings">Add Timings</button>
+                    </div>
 				</div>			
-				      <button class="btn btn-primary" ng-click="AddRestaurant()">Add Restaurant</button>
+        <div class="form-group">
+         <div class="col-sm-offset-4 col-sm-10">
+				      <button class="btn btn-primary " ng-click="AddRestaurant()">Add Restaurant</button>
+         </div>
+        </div>
 			</form>
+      <br>
+      <br>
 		</div>	
 
 
 
-        <table class="table">
+        <table class="table" ng-show="AllRestaurants.length">
             <thead>
                 <tr>
                     <th>Restaurant Name</th>
@@ -50,7 +64,7 @@
                              {{Restaurant.phone}}
                            </td>
                            <td>
-                             {{Restaurant.timings}}
+                             <button class="btn btn-primary" data-toggle="modal" data-target="#ShowTimings" ng-click="My_Restaurant(Restaurant._id)" >Show Timings</button>
                            </td>
                            <td>
                              <button class="btn btn-primary btn-sm" ng-click="UpdateRestautantPage(Restaurant._id)" data-toggle="modal" style="background-color: green" >Edit </button>
@@ -70,6 +84,110 @@
         </table>
 
         <div class="col-xs-12">
+
+          <div class="modal" id="ShowTimings">
+            <div class="modal-dialog">
+             <div class="modal-content">
+                  <div class="modal-header">
+                     <button class="close" data-dismiss="modal">&times;</button>
+                     <h3> {{my_restaurant.restaurant}} Schedule </h3>
+                  </div>
+                  <div class="modal-body" >
+                <table class="table table-striped" id="tblGrid">
+            <thead id="tblHead">
+              <tr>
+                <th>Days</th>
+                <th>Timings</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Monday</td>
+                <td>{{my_restaurant.timings.monday}}</td>
+              </tr>
+              <tr><td>Tuesday</td>
+                <td>{{my_restaurant.timings.tuesday}}</td>
+              </tr>
+              <tr><td>Wednesday</td>
+                <td>{{my_restaurant.timings.wednesday}}</td>
+              </tr>
+              <tr><td>Thursday</td>
+                <td>{{my_restaurant.timings.thursday}}</td>
+              </tr><tr><td>Friday</td>
+                <td>{{my_restaurant.timings.friday}}</td>
+              </tr><tr><td>Saturday</td>
+                <td>{{my_restaurant.timings.saturday}}</td>
+              </tr><tr><td>Sunday</td>
+                <td>{{my_restaurant.timings.sunday}}</td>
+              </tr>
+            </tbody>
+          </table>
+             </div>
+             <div class="modal-footer">
+                <button class="btn btn-primary btn-sm" data-dismiss="modal"> OK</button>
+             </div>
+          </div>
+            </div>
+          </div>
+
+         <div class="modal" id="Addtimings">
+            <div class="modal-dialog">
+                 <div class="modal-content">
+                 <div class="modal-header">
+                     <button class="close" data-dismiss="modal">&times;</button>
+                    <h3>Add Timings </h3>
+                 </div>
+                 <div class="modal-body">
+                   <form class="form-horizontal">
+                     <div class="form-group">
+                        <label class="control-label col-sm-4" >Monday:</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.monday" />
+                    </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-sm-4" >Tuesday:</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.tuesday">
+                    </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-sm-4" >Wednesday:</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.wednesday"/>
+                    </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-sm-4" >Thursday:</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.thursday">
+                    </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-sm-4" >Friday:</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.friday">
+                    </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-sm-4" >Saturday:</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.saturday">
+                    </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-sm-4" >Sunday:</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.sunday">
+                    </div>
+                     </div>
+                   </form>
+                 </div>
+                 <div class="modal-footer">
+                   <button class="btn btn-primary btn-sm" ng-click="timingfunc()" data-dismiss="modal">Add timings</button>
+                 </div>
+                 </div>
+            </div>
+         </div>   
 <div class="modal" id="DeleteRestaurant">
 <div class="modal-dialog">
 <div class="modal-content">

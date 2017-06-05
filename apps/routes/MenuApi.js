@@ -20,7 +20,7 @@ MenuRouter.post('/addmenu',function(req,res){
   var M=new Menu({
       menu: req.body.menu,
       price:parseFloat(req.body.price),
-      typesofcuisine: req.body.typesofcuisine,
+      catagory: req.body.catagory,
        restaurant: req.body.ID,
     });
 
@@ -47,13 +47,9 @@ MenuRouter.put('/updatemenu',function(req,res){
            }
            else{
                data.menu= req.body.menu,
-      data.price=parseInt(req.body.price),
+      data.price=parseFloat(req.body.price),
       data.catagory= req.body.catagory,
        data.restaurant= req.body.restaurant,
-      data.serving= req.body.serving,
-      data.quantity= req.body.quantity,
-      data.details= req.body.details,
-      data.glutinfree= req.body.glutinfree
                      data.save(function(err,updatedData){
       if(err){
           res.status(400).json(err);

@@ -6,11 +6,17 @@ var RestaurantSchema=new Schema({
     restaurant: String,
     address: {type: String, unique: true},
     phone: Number,
-    timings: String,
-    // menu: [{
-    //     type: mongooose.Schema.Types.ObjectId,
-    //     ref: 'menu'
-    // }]
+    timings: 
+      {
+    monday: String,
+    tuesday:String,
+    wednesday:String,
+    thursday: String,
+    friday: String,
+    saturday: String,
+    sunday: String
+      }
+         
 });
 RestaurantSchema.plugin(textSearch);
 RestaurantSchema.index({restaurant:'text'});
