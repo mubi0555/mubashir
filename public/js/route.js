@@ -23,9 +23,9 @@ var app=angular.module('MyApp');
 		})
         .when('/updatemenu/:id/:rest_id',{
             templateUrl: 'views/pages/updatemenu.html',
-            controller: 'UpdateMenuCtrl'
+            controller: 'ShowMenuCtrl'
         })
-        .when('/menuDetails:id',{
+        .when('/menuDetails:id/:name/:restID',{
             templateUrl:'views/pages/menuDetails.html',
             controller: 'menuDetailCtrl'
         })

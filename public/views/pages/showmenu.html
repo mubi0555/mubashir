@@ -1,23 +1,65 @@
-<div>
-  <!--<h4>{{RestaurantName}}</h4>-->
-  <h3 style="text-align: center;">Menu Form</h3>
-  <div style="width: 30%; margin: 0 auto;">
-    <form>
-      <div class="form-group">
-        Menu <input class="form-control" placeholder="e.g Burger" type="text" ng-model="menu" />
-      </div>
-      <div class="form-group">
-        Price($) <input class="form-control" placeholder="e.g 5.6" type="number" ng-model="price" step="0.01" />
-      </div>
-      <div class="form-group">
-        Catagory <input class="form-control" placeholder="e.g Fast food" type="text" ng-model="catagory" />
-      </div>
-      <button class="btn btn-primary" ng-click="AddMenu()">Add Menu</button>
-    </form>
+<nav class="navbar navbar-default" style="background-color: skyblue" ng-show="shownavMenu">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><img src="/views/images/EatRush2.png" width="50" height="20"  alt=""></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/home" >Home</a></li>
+      <li><a href="/showRestaurant" data-toggle="dropdown" class="dropdown-toggle" >Show Restaurants</a>
+      </li>
+      <li class="dropdown" style="padding-top:8px;" >
+
+<select style="background-color: gainsboro; " class="form-control" ng-model="searchRest" ng-options="item as item.restaurant for item in getRestaurant" ng-change="ShowMenuPage(searchRest)">
+</select>
+      </li>
+      <li style="padding-top:15px;"> 
+       <p>{{searchRest.address}}</p>
+       </li>
+     <li style="padding-top:15px;"> 
+       <p>({{searchRest.phone}})</p>
+       </li>
+    </ul>
+    <div class="nav navbar-nav navbar-right" style="padding-top:8px; ">
+     <button style="background-color: gainsboro;" class="btn btn-default"  data-toggle="modal" data-target="#AddMEnu">Add Menu</button>
+    </div>
   </div>
-</div>
+</nav>   
 <div class="container">
   <div class="row">
+<div class="modal" id="AddMEnu">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header"> 
+<h3>Menu Form</h3>
+</div>
+<div class="modal-body">
+<form class="form-horizontal">
+<div class="form-group">
+<label class="control-label col-sm-4" >Menu:</label>
+<div class="col-sm-4">
+<input class="form-control" placeholder="e.g Burger" type="text" ng-model="menu" />
+</div>
+</div>
+<div class="form-group">
+<label class="control-label col-sm-4" >Price(CDN$):</label>
+<div class="col-sm-4">
+<input class="form-control" placeholder="e.g 5.6" type="number" ng-model="price" step="0.01" />
+</div>
+</div>
+<div class="form-group">
+<label class="control-label col-sm-4" >Catagory:</label>
+<div class="col-sm-4">
+<input class="form-control" placeholder="e.g Fast food" type="text" ng-model="catagory" />
+</div>
+</div>
+</form>
+</div>
+<div class="modal-footer">
+<button class="btn btn-primary" ng-click="AddMenu()" data-dismiss="modal">Add Menu</button>
+</div>
+</div>
+</div>
+</div>
 
     <div class="modal" id="DeleteMenu">
       <div class="modal-dialog">
@@ -31,9 +73,7 @@
         </div>
       </div>
     </div>
-<select ng-model="searchRest"  ng-options="item as item.restaurant for item in getRestaurant" ng-change="ShowMenuPage(searchRest)">
-</select>
-
+    
     <table class="table" ng-show="getMenus.length">
       <thead>
         <tr>
@@ -49,10 +89,50 @@
           <td>{{Menu.catagory}}</td>
           <td><button ng-click="DeleteMenu(Menu._id,Menu)" style="background-color: red" class="btn btn-primary btn-sm" data-toggle="modal"
               data-target="#DeleteMenu">Remove </button></td>
-          <td><button class="btn btn-primary btn-sm" style="background-color: green" ng-click="UpdateMenuPAge(Menu._id,Menu.restaurant)">Edit </button></td>
+          <td><button class="btn btn-primary btn-sm" style="background-color: green" data-toggle="modal"  data-target="#upDateMenu" ng-click="UpdateMenuPAge(Menu._id,Menu.restaurant)" >Edit </button></td>
           <td><button class="btn btn-primary btn-sm" ng-click="MenuDetailPage(Menu._id)">Details </button>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="modal" id="upDateMenu">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h3> Update Menu</h3>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal">
+              <div class="form-group">
+                   <label class="control-label col-sm-4" >Menu:</label>
+                <div class="col-sm-4">
+                 <input class="form-control" placeholder="e.g Burger" type="text" ng-model="SearchMenu.menu" />
+              </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4" >Price (CDN$):</label>
+                <div class="col-sm-4">
+                 <input class="form-control" placeholder="e.g 5.6" type="number" ng-model="SearchMenu.price" step="0.01"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4" >Catagory:</label>
+                <div class="col-sm-4">
+                <input class="form-control" placeholder="e.g Italian" type="text" ng-model="SearchMenu.catagory"/>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+             <button class="btn btn-primary" data-dismiss="modal" ng-click="UpdateMenu(SearchMenu._id)">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

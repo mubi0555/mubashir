@@ -8,10 +8,7 @@ var MenuSchema=new Schema({
       type: String,
       enum: ['Yes','No']
     },
-    typeofmenu:{
-      type: String,
-      enum: ['Halal','Haram']
-    },
+    typeofmenu: { type: Boolean, default: false },
     other_details:String,
     serving: String,
     quantity: String,

@@ -46,17 +46,17 @@ MenuRouter.put('/updatemenu',function(req,res){
                res.status(400).json(err);
            }
            else{
-               data.menu= req.body.menu,
-      data.price=parseFloat(req.body.price),
-      data.catagory= req.body.catagory,
-       data.restaurant= req.body.restaurant,
-                     data.save(function(err,updatedData){
+                data.menu= req.body.menu,
+                data.price=parseFloat(req.body.price),
+                data.catagory= req.body.catagory,
+                data.restaurant= req.body.restaurant,
+                data.save(function(err,updatedData){
       if(err){
           res.status(400).json(err);
 
       }
       else{
-          console.log(data);
+          console.log(updatedData);
           res.json(updatedData);
       }
   });

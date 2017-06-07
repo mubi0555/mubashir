@@ -12,30 +12,27 @@
        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
        <script src="/lib/bootstrap/css/bootstrap.min.css"></script>
        <link href="/lib/bootstrap/js/bootstrap.min.js" rel="stylesheet">
-       <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">
         <script src="/js/app.js"></script>
         <script src="/js/route.js"></script>
   </head>
      <body ng-app="MyApp" ng-controller="MenuCtrl">
        <img src="/views/images/EatRush2.png" class="img-responsive center-block"  alt="">
-<nav class="navbar navbar-default" style="background-color: skyblue">
+<nav class="navbar navbar-default" style="background-color: skyblue" ng-show="shownav">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#"><img src="/views/images/EatRush2.png" width="50" height="20"  alt=""></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="/home">Home</a></li>
-      <li><a href="/showRestaurant" data-toggle="dropdown" class="dropdown-toggle">Show Restaurants</a>
+      <li><a href="/home" >Home</a></li>
+      <li><a href="/showRestaurant" data-toggle="dropdown" class="dropdown-toggle" >Show Restaurants</a>
       </li>
-      <!--<li><a href="" data-toggle="dropdown" class="dropdown-toggle">Show Menu</a>
-        </li>
-        <li><a href="" data-toggle="dropdown" class="dropdown-toggle">Menu Detail</a>
-        </li>-->
+      <li><a href="/showmenu/:restName/:restaurantid" data-toggle="dropdown" class="dropdown-toggle" ng-show="showMenu" >Show Menu</a>
+      </li>
     </ul>
-    <div class="nav navbar-nav navbar-right">
+    <!--<div class="nav navbar-nav navbar-right">
       <button class="btn btn-outline-success my-2 my-sm-0"> Login</button>
       <button class="btn btn-outline-success my-2 my-sm-0"> SignUp</button>
-    </div>
+    </div>-->
   </div>
 </nav>    
             <div class="content" >  
@@ -43,3 +40,43 @@
             </div>
      </body>
 </html>
+
+<div class="container">
+<div class="row">
+<div class="modal" id="AddMenu">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header"> 
+<h3>Menu Form</h3>
+</div>
+<div class="modal-body">
+<form class="form-horizontal">
+<div class="form-group">
+<label class="control-label col-sm-4" >Menu:</label>
+<div class="col-sm-4">
+<input class="form-control" placeholder="e.g Burger" type="text" ng-model="menu" />
+</div>
+</div>
+<div class="form-group">
+<label class="control-label col-sm-4" >Price(CDN$):</label>
+<div class="col-sm-4">
+<input class="form-control" placeholder="e.g 5.6" type="number" ng-model="price" step="0.01" />
+</div>
+</div>
+<div class="form-group">
+<label class="control-label col-sm-4" >Catagory:</label>
+<div class="col-sm-4">
+<input class="form-control" placeholder="e.g Fast food" type="text" ng-model="catagory" />
+</div>
+</div>
+</form>
+</div>
+<div class="modal-footer">
+<button class="btn btn-primary" ng-click="AddMenu()" data-dismiss="modal">Add Menu</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
