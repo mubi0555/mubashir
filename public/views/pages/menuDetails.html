@@ -1,13 +1,7 @@
 <nav class="navbar navbar-default" style="background-color: skyblue" ng-show="showdetails">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#"><img src="/views/images/EatRush2.png" width="50" height="20"  alt=""></a>
-    </div>
     <ul class="nav navbar-nav">
-      <li><a href="/home" >Home</a></li>
-      <li><a href="/showRestaurant" data-toggle="dropdown" class="dropdown-toggle" >Show Restaurants</a>
-      </li>
-      <li><a ng-href="/showmenu/{{restname}}/{{restId}}" data-toggle="dropdown" class="dropdown-toggle"  >Show Menu</a>
+      <li><a ng-href="/showmenu/{{restname}}/{{restId}}" data-toggle="dropdown" class="dropdown-toggle"  >Back to Menu</a>
       </li>
     </ul>
     <div class="nav navbar-nav navbar-right" style="padding-top:8px; ">
@@ -15,10 +9,10 @@
     </div>
   </div>
 </nav>  
-<div class="container" style="background-color: skyblue">
+<!--<div class="container" style="background-color: skyblue">
 <h3 style="text-align: center">Menu Details</h3>
 
-</div>
+</div>-->
 
 <div class="container">
 <div class="row">
@@ -62,7 +56,7 @@
     </div>
 </div>
 <div class="form-group">
-<label class="control-label col-sm-4" >Type of menu:</label>
+<label class="control-label col-sm-4" >Halal?</label>
       <div class="checkbox">
       <label ><input type="checkbox" ng-model="typeofmenu" >Halal</label>
     </div>
@@ -80,65 +74,25 @@
 
 
 
-<div class="container" style="background-color: skyblue">
+<div class="container" style="background-color: skyblue" ng-show="showButton">
 <div class="row">
-<div class="col-lg-3 col-md-3" >
-  <img src="/views/images/burger.jpg"alt=""  border="5" style="height: 120px;border: 2px solid;border-radius: 25px;background-color: skyblue"></td> 
+<div class="col-lg-3 col-md-2" >
+  <img src="/views/images/pizza.jpg"alt=""  style="width: 200px; height: 200px;padding-top: 70px;padding-left: 50px"></td> 
 </div>
-<div class="col-lg-6 col-md-6" ng-show="showButton">
-<h3 >{{getMenuDetails.menu}}</h3><br>
+<div class="col-lg-6 col-md-6" >
+<h3 >{{getMenuDetails.menu}}</h3>
 <p >{{getMenuDetails.other_details}}</p>
+<p><strong>Catagory</strong> : {{getMenuDetails.catagory}}</p>
+<p><strong>Type Of Cuisine</strong> : {{getMenuDetails.typesofcuisine}}</p>
+<p><strong>Quantity</strong> : {{getMenuDetails.quantity}}</p>
+<p><strong>Serving</strong> : {{getMenuDetails.serving}}</p>
+<p><strong>Gluten Free ?</strong> : {{getMenuDetails.glutinfree}}</p>
 </div>
 <div class="col-lg-3 col-md-3">
-<h2 ng-show="showButton">${{getMenuDetails.price}}</h2>
-<button class="btn btn-primary" data-toggle="modal" data-target="#Details" ng-show="showButton" >More Details</button>
+<h2 >${{getMenuDetails.price}}</h2>
+<strong>{{halal}}</strong>
 </div>
 
 </div>
 
-</div>
-
-<div class="container">
-<div class="row">
-<div class="modal" id="Details" >
-<div class="modal-dialog" style="width: 60%">
-<div class="modal-content">
-<div class="modal-header">
-  <span>
-<button class="close" data-dismiss="modal">&times;</button>  
-<h3> Menu Details</h3></span>
-</div>
-<div class="modal-body">
-<table class="table table-striped">
-<thead>
-        <tr>
-          <th>Menu Item</th>
-          <th>Type Of Cuisine</th>
-          <th>Gluten Free</th>
-          <th>Serving</th>
-          <th>Quantity</th>
-          <th>Catagory</th>
-          <th>Halal</th>
-        </tr>
-</thead>
-<tbody>
- <tr>
-             <td>{{getMenuDetails.menu}}</td>
-             <td>{{getMenuDetails.typesofcuisine}}</td>
-             <td>{{getMenuDetails.glutinfree}}</td>
-             <td>{{getMenuDetails.serving}}</td>
-            <td>{{getMenuDetails.quantity}}</td>
-            <td>{{getMenuDetails.catagory}}</td>
-            <td>{{halal}}</td>
-          </tr>
-</tbody>
-</table>
-</div>
-<div class="modal-footer">
-<button class="btn btn-primary btn-sm" data-dismiss="modal">OK</button>
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>

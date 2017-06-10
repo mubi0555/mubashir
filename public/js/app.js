@@ -117,13 +117,12 @@ app.controller('SignUp', function (LoginService, $scope) {
 });
 
 app.controller('MenuCtrl', function ($scope, MenuData, $routeParams, $location, RestaurantServices,$rootScope) {
-    $rootScope.shownav=true;
     $rootScope.shownavMenu=false;
     $scope.my_restaurant = [];
     $scope.TimingsArray = {};
     $scope.AllMenus = [];
     $scope.AllRestaurants = [];
-    $scope.myobject = {
+    $scope.myobjectOpen = {
         monday: '',
         tuesday: '',
         wednesday: '',
@@ -132,16 +131,21 @@ app.controller('MenuCtrl', function ($scope, MenuData, $routeParams, $location, 
         saturday: '',
         sunday: ''
     }
-    $scope.timingfunc = function () {
-
-        console.log($scope.myobject);
+    $scope.myobjectClose = {
+        monday: '',
+        tuesday: '',
+        wednesday: '',
+        thursday: '',
+        friday: '',
+        saturday: '',
+        sunday: ''
     }
-
+    
     $scope.My_Restaurant = function (id) {
         RestaurantServices.SearchRestaurant(id)
             .then(function (res) {
                 $scope.my_restaurant = res.data;
-                console.log($scope.my_restaurant.timings);
+                console.log($scope.my_restaurant.myobjectOpen);
             }, function (err) {
                 console.log(err);
             });
@@ -150,7 +154,6 @@ app.controller('MenuCtrl', function ($scope, MenuData, $routeParams, $location, 
     RestaurantServices.getAllRestaurant()
         .then(function (res) {
             $scope.AllRestaurants = res.data;
-            console.log($scope.AllRestaurants.timings);
         }, function (err) {
             console.log(err);
         });
@@ -174,36 +177,43 @@ app.controller('MenuCtrl', function ($scope, MenuData, $routeParams, $location, 
             restaurant: $scope.restaurant,
             address: $scope.address,
             phone: $scope.phone,
-            timings: $scope.myobject,
+            opentime: $scope.myobjectOpen,
+            closetime:$scope.myobjectClose
         }
 
         if ($scope.restaurant == '' || $scope.address == '' || $scope.phone == '') {
             alert('Please fill all fields');
             return false;
         }
-        if ($scope.myobject.monday == '' || $scope.myobject.tuesday == '' || $scope.myobject.wednesday == '' || $scope.myobject.thursday == ''
-            || $scope.myobject.friday == '' || $scope.myobject.saturday == '' || $scope.myobject.sunday == '') {
+        if ($scope.myobjectOpen.monday == '' || $scope.myobjectOpen.tuesday == '' || $scope.myobjectOpen.wednesday == '' || $scope.myobjectOpen.thursday == ''
+            || $scope.myobjectOpen.friday == '' || $scope.myobjectOpen.saturday == '' || $scope.myobjectOpen.sunday == '') {
 
             alert('Please fill timings');
         }
+        else if($scope.myobjectClose.monday == '' || $scope.myobjectClose.tuesday == '' || $scope.myobjectClose.wednesday == '' || $scope.myobjectClose.thursday == ''
+            || $scope.myobjectClose.friday == '' || $scope.myobjectClose.saturday == '' || $scope.myobjectClose.sunday == ''){
+                alert('Please fill timings');
+            }
 
 
-        else {
+        
             RestaurantServices.createRestaurant(data)
                 .then(function (res) {
                     RestaurantServices.restaurantId = res.data._id;
+                    console.log($scope.myobjectOpen.monday);
                     console.log(RestaurantServices.restaurantId);
                     $scope.AllRestaurants.push(res.data);
                     $scope.restaurant = '';
                     $scope.address = '';
                     $scope.phone = '';
-                    $scope.timings = '';
+                    $scope.myobjectOpen = '';
+                    $scope.myobjectClose='';
                     console.log(res.data);
                 }, function (err) {
                     console.log(err);
                 });
 
-        }
+        
     }
 
 
@@ -236,7 +246,7 @@ app.controller('MenuCtrl', function ($scope, MenuData, $routeParams, $location, 
 });
 
 
-app.controller('menuDetailCtrl', function ($scope, $routeParams, $location, DetailsData,$rootScope) {
+app.controller('menuDetailCtrl', function ($scope, $routeParams, $location, DetailsData,$rootScope, RestaurantServices) {
     console.log($routeParams.restID);
     $scope.restId=$routeParams.restID;
     $scope.restname=$routeParams.name;
@@ -249,17 +259,17 @@ app.controller('menuDetailCtrl', function ($scope, $routeParams, $location, Deta
     $scope.typeofmenu = false;
     $scope.other_details = '';
     $scope.checkSearch = {};
-    $scope.halal='No';
-
+    $scope.halal='';
     $scope.showButton = false;
     console.log($scope.getMenuDetails);
+
     DetailsData.search($routeParams.id)
         .then(function (response) {
             $scope.checkSearch = response.data;
             console.log($scope.checkSearch);
             $scope.getMenuDetails = response.data;
             if($scope.getMenuDetails.typeofmenu==true){
-                $scope.halal=='Yes';
+                $scope.halal='Halal';
             }
             if ($scope.getMenuDetails.other_details != null) {
                 $scope.showButton = true;
@@ -283,7 +293,7 @@ app.controller('menuDetailCtrl', function ($scope, $routeParams, $location, Deta
             typeofmenu: $scope.typeofmenu,
             other_details: $scope.other_details
         }
-        if ($scope.typesofcuisine == '' || $scope.serving == '' || $scope.quantity == '' || $scope.glutinfree == '' || $scope.typeofmenu == false) {
+        if ($scope.typesofcuisine == '' || $scope.serving == '' || $scope.quantity == '' || $scope.glutinfree == ''||$scope.other_details=='' ) {
             alert('Please fill all the fields');
             return false
         }
@@ -297,12 +307,12 @@ app.controller('menuDetailCtrl', function ($scope, $routeParams, $location, Deta
                     DetailsData.create($routeParams.id, data)
                         .then(function (res) {
                             console.log(res.data);
-                            alert('You have successfully added details');
+                             alert('You have successfully added details');
                             DetailsData.search($routeParams.id)
                                 .then(function (response) {
                                     $scope.getMenuDetails = response.data;
                                     if($scope.getMenuDetails.typeofmenu==true){
-                $scope.halal=='Yes';
+                $scope.halal='Halal';
             }
             
                                     if ($scope.getMenuDetails.other_details != null) {
@@ -349,7 +359,6 @@ app.controller('menuDetailCtrl', function ($scope, $routeParams, $location, Deta
 });
 
 app.controller('ShowMenuCtrl', function ($scope, $rootScope, MenuData, RestaurantServices, $routeParams, $location) {
-    $rootScope.shownav=false;
     $rootScope.shownavMenu=true;
     $scope.getMenus = {};
     $scope.getRestaurant = {};

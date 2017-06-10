@@ -24,54 +24,84 @@
 		</div>
 
 <div class="modal" id="UpdatTiming">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="width: 60%">
                  <div class="modal-content">
                  <div class="modal-header">
                      <button class="close" data-dismiss="modal">&times;</button>
                     <h3>Add Timings </h3>
                  </div>
                  <div class="modal-body">
+                   <div class="col-sm-4" style="padding-left: 60px">
+                      
+                   </div>
+                   <div class="col-sm-4">
+                      <h4> Open </h4>
+                   </div>
+                   <div class="col-sm-4">
+                      <h4> Close </h4>
+                   </div>
                    <form class="form-horizontal">
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Monday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="SearchRestaurant.timings.monday" />
+                      <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.opentime.monday" />
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.closetime.monday" />
                     </div>
                      </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Tuesday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="SearchRestaurant.timings.tuesday">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.opentime.tuesday">
+                    </div>
+                    <div class="col-sm-4">
+                     <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.closetime.tuesday" />
                     </div>
                      </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Wednesday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="SearchRestaurant.timings.wednesday"/>
+                      <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.opentime.wednesday"/>
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.closetime.wednesday" />
                     </div>
                      </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Thursday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="SearchRestaurant.timings.thursday">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.opentime.thursday">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.closetime.thursday" />
                     </div>
                      </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Friday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="SearchRestaurant.timings.friday">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.opentime.friday">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.closetime.friday" />
                     </div>
                      </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Saturday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="SearchRestaurant.timings.saturday">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.opentime.saturday">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.closetime.saturday" />
                     </div>
                      </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Sunday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="SearchRestaurant.timings.sunday">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.opentime.sunday">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="SearchRestaurant.closetime.sunday" />
                     </div>
                      </div>
                    </form>

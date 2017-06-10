@@ -6,11 +6,21 @@ var RestaurantSchema=new Schema({
     restaurant: String,
     address: {type: String, unique: true},
     phone: Number,
-    timings: 
+    opentime: 
+      {
+    monday:  String,
+    tuesday: String,
+    wednesday: String,
+    thursday: String,
+    friday: String,
+    saturday: String,
+    sunday: String
+      },
+      closetime:
       {
     monday: String,
-    tuesday:String,
-    wednesday:String,
+    tuesday: String,
+    wednesday: String,
     thursday: String,
     friday: String,
     saturday: String,

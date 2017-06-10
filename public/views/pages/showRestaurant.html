@@ -102,22 +102,22 @@
             </thead>
             <tbody>
               <tr><td>Monday</td>
-                <td>{{my_restaurant.timings.monday}}</td>
+                <td>{{my_restaurant.opentime.monday}}-{{my_restaurant.closetime.monday}}</td>
               </tr>
               <tr><td>Tuesday</td>
-                <td>{{my_restaurant.timings.tuesday}}</td>
+                <td>{{my_restaurant.opentime.tuesday}}-{{my_restaurant.closetime.tuesday}}</td>
               </tr>
               <tr><td>Wednesday</td>
-                <td>{{my_restaurant.timings.wednesday}}</td>
+                <td>{{my_restaurant.opentime.wednesday}}-{{my_restaurant.closetime.wednesday}}</td>
               </tr>
               <tr><td>Thursday</td>
-                <td>{{my_restaurant.timings.thursday}}</td>
+                <td>{{my_restaurant.opentime.thursday}}-{{my_restaurant.closetime.thursday}}</td>
               </tr><tr><td>Friday</td>
-                <td>{{my_restaurant.timings.friday}}</td>
+                <td>{{my_restaurant.opentime.friday}}-{{my_restaurant.closetime.friday}}</td>
               </tr><tr><td>Saturday</td>
-                <td>{{my_restaurant.timings.saturday}}</td>
+                <td>{{my_restaurant.opentime.saturday}}-{{my_restaurant.closetime.saturday}}</td>
               </tr><tr><td>Sunday</td>
-                <td>{{my_restaurant.timings.sunday}}</td>
+                <td>{{my_restaurant.opentime.sunday}}-{{my_restaurant.closetime.sunday}}</td>
               </tr>
             </tbody>
           </table>
@@ -129,55 +129,84 @@
             </div>
           </div>
 
-         <div class="modal" id="Addtimings">
-            <div class="modal-dialog">
+         <div class="modal" id="Addtimings" >
+            <div class="modal-dialog" style="width: 60%">
                  <div class="modal-content">
                  <div class="modal-header">
                      <button class="close" data-dismiss="modal">&times;</button>
                     <h3>Add Timings </h3>
                  </div>
                  <div class="modal-body">
+                   <div class="col-sm-4" style="padding-left: 60px">
+                   </div>
+                   <div class="col-sm-4">
+                      <h4> Open </h4>
+                   </div>
+                   <div class="col-sm-4">
+                      <h4> Close </h4>
+                   </div>
                    <form class="form-horizontal">
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Monday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.monday" />
+                      <input type="text" id="openmonday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectOpen.monday">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" id="closemonday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectClose.monday">
                     </div>
                      </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Tuesday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.tuesday">
+                      <input type="text" id="opentuesday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectOpen.tuesday">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" id="closetuesday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectClose.tuesday">
                     </div>
                      </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Wednesday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.wednesday"/>
+                      <input type="text" id="openwednesday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectOpen.wednesday"/>
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" id="closewednesday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectClose.wednesday">
                     </div>
                      </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Thursday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.thursday">
+                      <input type="text" id="openthursday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectOpen.thursday">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" id="closethursday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectClose.thursday">
                     </div>
                      </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Friday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.friday">
+                      <input type="text" id="openfriday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectOpen.friday">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" id="closefriday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectClose.friday">
                     </div>
                      </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Saturday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.saturday">
+                      <input type="text" id="opensaturday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectOpen.saturday">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" id="closesaturday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectClose.saturday">
                     </div>
                      </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4" >Sunday:</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control"  placeholder="e.g 10 am- 9 pm" ng-model="myobject.sunday">
+                      <input type="text" id="opensunday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectOpen.sunday">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" id="closesunday" class="form-control"  placeholder="e.g 10 am/9 pm" ng-model="myobjectClose.sunday">
                     </div>
                      </div>
                    </form>

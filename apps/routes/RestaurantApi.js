@@ -11,7 +11,8 @@ var R=new Restaurant({
     restaurant: req.body.restaurant,
     address: req.body.address,
     phone: parseInt(req.body.phone),
-    timings:req.body.timings
+    opentime:req.body.opentime,
+    closetime:req.body.closetime
 });
     R.save(function(error,data){
         if(error){
@@ -25,9 +26,10 @@ var R=new Restaurant({
 });
 
 RestaurantRouter.get('/findRestaurant',function(req,res){
+    var date=new Date();
      Restaurant.find(function(error,data){
          if(error){
-             res.status(400).json(err);
+             res.status(400).json(error);
          }
          res.json(data);
      });
@@ -71,7 +73,8 @@ RestaurantRouter.put('/updaterestaurant',function(req,res){
                data.restaurant=req.body.restaurant;
                data.address=req.body.address;
                data.phone=parseInt(req.body.phone);
-               data.timings=req.body.timings;
+               data.opentime=req.body.opentime;
+               data.closetime=req.body.closetime;
                      data.save(function(err,updatedData){
       if(err){
           res.status(400).json(err);
