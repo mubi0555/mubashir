@@ -1,5 +1,4 @@
 var express=require('express');
-// var app=express();
 var RestaurantRouter=express.Router();
 
 var Restaurant=require('../models/Restaurant.js');
@@ -12,11 +11,15 @@ var R=new Restaurant({
     address: req.body.address,
     phone: parseInt(req.body.phone),
     opentime:req.body.opentime,
-    closetime:req.body.closetime
+    closetime:req.body.closetime,
+    opentimezone: req.body.opentimezone,
+    closetimezone:req.body.closetimezone
 });
     R.save(function(error,data){
+        
         if(error){
             res.status(400).json();
+            console.log(data);
         }
         else{
              console.log(data);
@@ -26,7 +29,6 @@ var R=new Restaurant({
 });
 
 RestaurantRouter.get('/findRestaurant',function(req,res){
-    var date=new Date();
      Restaurant.find(function(error,data){
          if(error){
              res.status(400).json(error);
@@ -75,6 +77,8 @@ RestaurantRouter.put('/updaterestaurant',function(req,res){
                data.phone=parseInt(req.body.phone);
                data.opentime=req.body.opentime;
                data.closetime=req.body.closetime;
+               data.opentimezone=req.body.opentimezone;
+               data.closetimezone=req.body.closetimezone
                      data.save(function(err,updatedData){
       if(err){
           res.status(400).json(err);
