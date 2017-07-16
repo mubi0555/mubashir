@@ -15,6 +15,7 @@ var MenuSchema=new Schema({
     price: Number,
     typesofcuisine: String,
     catagory: String,
+    img: { data: Buffer, contentType: String },
     restaurant: {
       type: mongoose.Schema.Types.ObjectId,
       ref : 'Restaurant'

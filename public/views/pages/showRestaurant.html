@@ -64,7 +64,6 @@
                            <td>
                              {{Restaurant.phone}}
                            </td>
-                           <td>{{Restaurant.property}}</td>
                            <td>
                              <button class="btn btn-primary" data-toggle="modal" data-target="#ShowTimings" ng-click="My_Restaurant(Restaurant._id)" >Show Timings</button>
                            </td>
@@ -104,22 +103,22 @@
             </thead>
             <tbody>
               <tr><td>Monday</td>
-                <td>{{my_restaurant.opentime.monday}} {{my_restaurant.opentimezone.monday}} - {{my_restaurant.closetime.monday}}  {{my_restaurant.closetimezone.monday}}</td>
+                <td>{{my_restaurant.opentime.monday}} - {{my_restaurant.closetime.monday}}</td>
               </tr>
               <tr><td>Tuesday</td>
-                <td>{{my_restaurant.opentime.tuesday}} {{my_restaurant.opentimezone.tuesday}}- {{my_restaurant.closetime.tuesday}} {{my_restaurant.closetimezone.tuesday}}</td>
+                <td>{{my_restaurant.opentime.tuesday}}- {{my_restaurant.closetime.tuesday}}</td>
               </tr>
               <tr><td>Wednesday</td>
-                <td>{{my_restaurant.opentime.wednesday}} {{my_restaurant.opentimezone.wednesday}} - {{my_restaurant.closetime.wednesday}} {{my_restaurant.closetimezone.wednesday}}</td>
+                <td>{{my_restaurant.opentime.wednesday}} - {{my_restaurant.closetime.wednesday}}</td>
               </tr>
               <tr><td>Thursday</td>
-                <td>{{my_restaurant.opentime.thursday}} {{my_restaurant.opentimezone.thursday}} - {{my_restaurant.closetime.thursday}} {{my_restaurant.closetimezone.thursday}}</td>
+                <td>{{my_restaurant.opentime.thursday}} - {{my_restaurant.closetime.thursday}} </td>
               </tr><tr><td>Friday</td>
-                <td>{{my_restaurant.opentime.friday}} {{my_restaurant.opentimezone.friday}} - {{my_restaurant.closetime.friday}} {{my_restaurant.closetimezone.friday}}</td>
+                <td>{{my_restaurant.opentime.friday}} - {{my_restaurant.closetime.friday}}</td>
               </tr><tr><td>Saturday</td>
-                <td>{{my_restaurant.opentime.saturday}} {{my_restaurant.opentimezone.saturday}} - {{my_restaurant.closetime.saturday}} {{my_restaurant.closetimezone.saturday}}</td>
+                <td>{{my_restaurant.opentime.saturday}} - {{my_restaurant.closetime.saturday}}</td>
               </tr><tr><td>Sunday</td>
-                <td>{{my_restaurant.opentime.sunday}} {{my_restaurant.opentimezone.sunday}} - {{my_restaurant.closetime.sunday}} {{my_restaurant.closetimezone.saturday}}</td>
+                <td>{{my_restaurant.opentime.sunday}} - {{my_restaurant.closetime.sunday}}</td>
               </tr>
             </tbody>
           </table>
@@ -151,141 +150,64 @@
                      <div class="form-group">
                         <label class="control-label col-sm-2" >Monday:</label>
                         <div class="col-sm-4"> 
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control"  min="1" max="12" ng-model="myobjectOpen.monday">
-                    </div><span>
-                    <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Opentimezone.monday" ng-options="item for item  in time" ></select>
-                    </div></span>
+                      <input type="text" class="form-control"  ng-model="myobjectOpen.monday">
                         </div>
                         <div class="col-sm-4" >
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control"  min="1" max="12" ng-model="myobjectClose.monday">
-                    </div><span>
-                      <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Closetimezone.monday" ng-options="item  for item  in time"></select>
-                    </div>
-                      </span>
+                      <input type="text" class="form-control"  ng-model="myobjectClose.monday">
                     </div>
                      </div>
                       <div class="form-group">
                         <label class="control-label col-sm-2" >Tuesday:</label>
                         <div class="col-sm-4"> 
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control" min="1" max="12" ng-model="myobjectOpen.tuesday">
-                    </div><span>
-                    <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Opentimezone.tuesday" ng-options="item  for item  in time"></select>
-                    </div></span>
+                      <input type="text" class="form-control" ng-model="myobjectOpen.tuesday">
                         </div>
                         <div class="col-sm-4" >
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control" min="1" max="12" ng-model="myobjectClose.tuesday">
-                    </div><span>
-                      <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Closetimezone.tuesday" ng-options="item for item  in time"></select>
-                    </div>
-                      </span>
+                      <input type="text" class="form-control" ng-model="myobjectClose.tuesday">
                     </div>
                      </div>
                       <div class="form-group">
                         <label class="control-label col-sm-2" >Wednesday:</label>
                         <div class="col-sm-4"> 
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control"  min="1" max="12" ng-model="myobjectOpen.wednesday">
-                    </div><span>
-                    <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Opentimezone.wednesday" ng-options="item for item  in time" ></select>
-                    </div></span>
+                      <input type="text" class="form-control" ng-model="myobjectOpen.wednesday">
                         </div>
                         <div class="col-sm-4" >
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control" min="1" max="12" ng-model="myobjectClose.wednesday">
-                    </div><span>
-                      <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Closetimezone.wednesday" ng-options="item for item  in time"></select>
-                    </div>
-                      </span>
+                      <input type="text" class="form-control"  ng-model="myobjectClose.wednesday">
                     </div>
                      </div>
                       <div class="form-group">
                         <label class="control-label col-sm-2" >Thursday:</label>
                         <div class="col-sm-4"> 
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control" min="1" max="12" ng-model="myobjectOpen.thursday">
-                    </div><span>
-                    <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Opentimezone.thursday" ng-options="item for item  in time" ></select>
-                    </div></span>
+                      <input type="text" class="form-control" ng-model="myobjectOpen.thursday">
                         </div>
                         <div class="col-sm-4" >
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control" min="1" max="12" ng-model="myobjectClose.thursday">
-                    </div><span>
-                      <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Closetimezone.thursday" ng-options="item for item  in time"></select>
-                    </div>
-                      </span>
+                      <input type="text" class="form-control" ng-model="myobjectClose.thursday">
                     </div>
                      </div>
                       <div class="form-group">
                         <label class="control-label col-sm-2" >Friday:</label>
                         <div class="col-sm-4"> 
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control" min="1" max="12" ng-model="myobjectOpen.friday">
-                    </div><span>
-                    <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Opentimezone.friday" ng-options="item for item  in time"></select>
-                    </div></span>
+                      <input type="text" class="form-control" ng-model="myobjectOpen.friday">
                         </div>
                         <div class="col-sm-4" >
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control"  min="1" max="12" ng-model="myobjectClose.friday">
-                    </div><span>
-                      <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Closetimezone.friday" ng-options="item for item  in time"></select>
-                    </div>
-                      </span>
+                      <input type="text" class="form-control" ng-model="myobjectClose.friday">
                     </div>
                      </div>
                       <div class="form-group">
                         <label class="control-label col-sm-2" >Saturday:</label>
                         <div class="col-sm-4"> 
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control" min="1" max="12" ng-model="myobjectOpen.saturday">
-                    </div><span>
-                    <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Opentimezone.saturday" ng-options="item for item  in time" ></select>
-                    </div></span>
+                      <input type="text" class="form-control" ng-model="myobjectOpen.saturday">
                         </div>
                         <div class="col-sm-4" >
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control"  min="1" max="12" ng-model="myobjectClose.saturday">
-                    </div><span>
-                      <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Closetimezone.saturday" ng-options="item for item  in time"></select>
-                    </div>
-                      </span>
+                      <input type="text" class="form-control"  ng-model="myobjectClose.saturday">
                     </div>
                      </div>
                       <div class="form-group">
                         <label class="control-label col-sm-2" >Sunday:</label>
                         <div class="col-sm-4"> 
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control"  min="1" max="12" ng-model="myobjectOpen.sunday">
-                    </div><span>
-                    <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Opentimezone.sunday" ng-options="item for item  in time" ></select>
-                    </div></span>
+                      <input type="text" class="form-control"ng-model="myobjectOpen.sunday">
                         </div>
                         <div class="col-sm-4" >
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control"  min="1" max="12" ng-model="myobjectClose.sunday">
-                    </div><span>
-                      <div class="col-sm-4" >
-                      <select class="btn btn-default" ng-model="Closetimezone.sunday" ng-options="item for item  in time"></select>
-                    </div>
-                      </span>
+                      <input type="text" class="form-control"  ng-model="myobjectClose.sunday">
                     </div>
                      </div>
                    </form>

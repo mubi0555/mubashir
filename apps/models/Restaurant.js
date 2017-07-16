@@ -8,17 +8,7 @@ var RestaurantSchema=new Schema({
     phone: Number,
     opentime: 
       {
-    monday:  Number,
-    tuesday: Number,
-    wednesday: Number,
-    thursday: Number,
-    friday: Number,
-    saturday: Number,
-    sunday: Number
-      },
-      opentimezone: 
-      {
-    monday:  String,
+    monday:  String ,
     tuesday: String,
     wednesday: String,
     thursday: String,
@@ -28,24 +18,14 @@ var RestaurantSchema=new Schema({
       },
       closetime:
       {
-    monday: Number,
-    tuesday: Number,
-    wednesday: Number,
-    thursday: Number,
-    friday: Number,
-    saturday: Number,
-    sunday: Number
-      },
-      closetimezone: 
-      {
-    monday:  String,
+    monday: String,
     tuesday: String,
     wednesday: String,
     thursday: String,
     friday: String,
     saturday: String,
     sunday: String
-      }
+      },
          
 });
 RestaurantSchema.plugin(textSearch);

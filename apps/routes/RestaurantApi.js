@@ -3,6 +3,19 @@ var RestaurantRouter=express.Router();
 
 var Restaurant=require('../models/Restaurant.js');
 
+RestaurantRouter.get('/findAllRestaurant/:name',function(req,res){
+Restaurant.find({ $text: { $search: req.params.name }
+    },function(err,data){
+        if(err){
+            res.status(400).json();
+        }
+        else{
+            res.json(data);
+        }
+    }); 
+
+});
+
 RestaurantRouter.post('/createRestaurant',function(req,res){
 
 var R=new Restaurant({
@@ -12,8 +25,6 @@ var R=new Restaurant({
     phone: parseInt(req.body.phone),
     opentime:req.body.opentime,
     closetime:req.body.closetime,
-    opentimezone: req.body.opentimezone,
-    closetimezone:req.body.closetimezone
 });
     R.save(function(error,data){
         

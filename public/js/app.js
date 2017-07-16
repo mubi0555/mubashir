@@ -10,6 +10,9 @@ app.factory('DetailsData', ['$http', function ($http) {
     DetailsData.search = function (id) {
         return $http.get(url + 'searchMenu/' + id);
     }
+    DetailsData.SavePhoto=function(id,data){
+        return $http.post(url+'addPhoto/'+id,data);
+    }
     return DetailsData;
 }]);
 
@@ -43,6 +46,10 @@ app.factory('RestaurantServices', ['$http', function ($http) {
     restaurantUrl = '/Restaurant/';
     var RestaurantData = {};
     RestaurantData.restaurantId = null;
+
+    RestaurantData.getRestaurants=function(name){
+        return $http.get(restaurantUrl+'findAllRestaurant/'+name);
+    }
 
     RestaurantData.createRestaurant = function (data) {
         return $http.post(restaurantUrl + 'createRestaurant', data);
@@ -78,44 +85,6 @@ app.factory('LoginService', ['$http', function ($http) {
 }]);
 
 
-app.controller('LoginCtrl', function (LoginService, $scope) {
-    $scope.email = '';
-    $scope.password = '';
-    $scope.Login = function () {
-        var SearchData = {
-            email: $scope.email,
-            password: $scope.password
-        }
-        LoginService.AuthenticateUser(SearchData)
-            .then(function (response) {
-                console.log('Authenticated user');
-            }, function (err) {
-                console.log(err);
-            })
-    }
-
-});
-
-app.controller('SignUp', function (LoginService, $scope) {
-    $scope.name = '';
-    $scope.email = '';
-    $scope.password = '';
-
-    $scope.SignUP = function () {
-        var SignUpData = {
-            name: $scope.name,
-            email: $scope.email,
-            password: $scope.password
-        };
-        LoginService.createUser(SignUpData)
-            .then(function (res) {
-                console.log('You have successfully signup');
-            }, function (err) {
-                console.log(err);
-            });
-    }
-});
-
 app.controller('MenuCtrl', function ($scope, MenuData, $routeParams, $location, RestaurantServices, $rootScope) {
     $rootScope.shownavMenu = false;
     $scope.my_restaurant = [];
@@ -123,24 +92,6 @@ app.controller('MenuCtrl', function ($scope, MenuData, $routeParams, $location, 
     $scope.AllMenus = [];
     $scope.AllRestaurants = [];
     $scope.time = ['am', 'pm'];
-    $scope.Opentimezone = {
-        monday: $scope.time[0],
-        tuesday: $scope.time[0],
-        wednesday: $scope.time[0],
-        thursday: $scope.time[0],
-        friday: $scope.time[0],
-        saturday: $scope.time[0],
-        sunday: $scope.time[0]
-    }
-    $scope.Closetimezone = {
-        monday: $scope.time[0],
-        tuesday: $scope.time[0],
-        wednesday: $scope.time[0],
-        thursday: $scope.time[0],
-        friday: $scope.time[0],
-        saturday: $scope.time[0],
-        sunday: $scope.time[0]
-    }
     $scope.myobjectOpen = {
         monday: '',
         tuesday: '',
@@ -159,7 +110,6 @@ app.controller('MenuCtrl', function ($scope, MenuData, $routeParams, $location, 
         saturday:'',
         sunday: ''
     }
-    $scope.schedule = 'Close';
     $scope.My_Restaurant = function (id) {
         RestaurantServices.SearchRestaurant(id)
             .then(function (res) {
@@ -182,70 +132,15 @@ app.controller('MenuCtrl', function ($scope, MenuData, $routeParams, $location, 
     RestaurantServices.getAllRestaurant()
         .then(function (res) {
             $scope.AllRestaurants = res.data;
-            for(var i=0;i<$scope.AllRestaurants.length;i++){
-              if($scope.currentday==0){
-               $scope.cmpopentime=$scope.AllRestaurants[i].opentime.sunday;
-               $scope.cmpopentimezone=$scope.AllRestaurants[i].opentimezone.sunday;
-               $scope.cmpclosetime=$scope.AllRestaurants[i].closetime.sunday;
-               $scope.cmpclosetimezone=$scope.AllRestaurants[i].closetimezone.sunday;
-              }
-            if($scope.currentday==1){
-               $scope.cmpopentime=$scope.AllRestaurants[i].opentime.monday;
-               $scope.cmpopentimezone=$scope.AllRestaurants[i].opentimezone.monday;
-               $scope.cmpclosetime=$scope.AllRestaurants[i].closetime.monday;
-               $scope.cmpclosetimezone=$scope.AllRestaurants[i].closetimezone.monday;
-            }
-            else if($scope.currentday==2){
-               $scope.cmpopentime=$scope.AllRestaurants[i].opentime.tuesday;
-               $scope.cmpopentimezone=$scope.AllRestaurants[i].opentimezone.tuesday;
-               $scope.cmpclosetime=$scope.AllRestaurants[i].closetime.tuesday;
-               $scope.cmpclosetimezone=$scope.AllRestaurants[i].closetimezone.tuesday;
-            }
-            else if($scope.currentday==3){
-               $scope.cmpopentime=$scope.AllRestaurants[i].opentime.wednesday;
-               $scope.cmpopentimezone=$scope.AllRestaurants[i].opentimezone.wednesday;
-               $scope.cmpclosetime=$scope.AllRestaurants[i].closetime.wednesday;
-               $scope.cmpclosetimezone=$scope.AllRestaurants[i].closetimezone.wednesday;
-            }
-            else if($scope.currentday==4){
-               $scope.cmpopentime=$scope.AllRestaurants[i].opentime.thursday;
-               $scope.cmpopentimezone=$scope.AllRestaurants[i].opentimezone.thursday;
-               $scope.cmpclosetime=$scope.AllRestaurants[i].closetime.thursday;
-               $scope.cmpclosetimezone=$scope.AllRestaurants[i].closetimezone.thursday;
-            }
-            else if($scope.currentday==5){
-               $scope.cmpopentime=$scope.AllRestaurants[i].opentime.friday;
-               $scope.cmpopentimezone=$scope.AllRestaurants[i].opentimezone.friday;
-               $scope.cmpclosetime=$scope.AllRestaurants[i].closetime.friday;
-               $scope.cmpclosetimezone=$scope.AllRestaurants[i].closetimezone.friday;
-            }
-            else{
-               $scope.cmpopentime=$scope.AllRestaurants[i].opentime.sunday;
-               $scope.cmpopentimezone=$scope.AllRestaurants[i].opentimezone.sunday;
-               $scope.cmpclosetime=$scope.AllRestaurants[i].closetime.sunday;
-               $scope.cmpclosetimezone=$scope.AllRestaurants[i].closetimezone.sunday;
-            }
-            if ($scope.cmpclosetimezone == 'pm') {
-                $scope.cmpclosetime += 12;
-            }
-            if ($scope.cmpopentimezone == 'pm') {
-                $scope.cmpopentime += 12;
-            }
-            if($scope.closetimezone=='am' && $scope.cmpclosetime==12){
-                $scope.cmpclosetime+=12;
-            }
-            if ($scope.currenthour >= $scope.cmpopentime && $scope.currenthour <= $scope.cmpclosetime) {
-                $scope.AllRestaurants[i].property='Open'
-            }
-            else{
-                $scope.AllRestaurants[i].property='Close';
-            }
-            }
+            
+            
         }, function (err) {
             console.log(err);
         });
         
 }
+    $scope.Restaurants=[];
+    $scope.showcol=false;
     $scope.GO = function () {
         MenuData.getAllMenus($scope.Search)
             .then(function (res) {
@@ -255,21 +150,29 @@ app.controller('MenuCtrl', function ($scope, MenuData, $routeParams, $location, 
             }, function (err) {
                 console.log(err);
             });
+
+            RestaurantServices.getRestaurants($scope.Search)
+            .then(function(res){
+                    $scope.Restaurants=res.data;
+                    console.log($scope.Restaurants);
+            },function(err){
+                console.log(err)
+            });
+    }
+    $scope.timingfunc=function(){
+        
     }
     $scope.restaurant = '';
     $scope.address = '';
     $scope.phone = '';
     $scope.restaurantID = '';
     $scope.AddRestaurant = function () {
-
         var data = {
             restaurant: $scope.restaurant,
             address: $scope.address,
             phone: $scope.phone,
             opentime: $scope.myobjectOpen,
             closetime: $scope.myobjectClose,
-            opentimezone: $scope.Opentimezone,
-            closetimezone: $scope.Closetimezone
         }
 
         if ($scope.restaurant == '' || $scope.address == '' || $scope.phone == '') {
@@ -312,24 +215,6 @@ app.controller('MenuCtrl', function ($scope, MenuData, $routeParams, $location, 
                         friday: '',
                         saturday: '',
                         sunday: ''
-                    }
-                    $scope.Opentimezone = {
-                        monday: $scope.time[0],
-                        tuesday: $scope.time[0],
-                        wednesday: $scope.time[0],
-                        thursday: $scope.time[0],
-                        friday: $scope.time[0],
-                        saturday: $scope.time[0],
-                        sunday: $scope.time[0]
-                    }
-                    $scope.Closetimezone = {
-                        monday: $scope.time[0],
-                        tuesday: $scope.time[0],
-                        wednesday: $scope.time[0],
-                        thursday: $scope.time[0],
-                        friday: $scope.time[0],
-                        saturday: $scope.time[0],
-                        sunday: $scope.time[0]
                     }
                     console.log(res.data);
                 }, function (err) {
@@ -410,18 +295,23 @@ app.controller('menuDetailCtrl', function ($scope, $routeParams, $location, Deta
 
     $scope.DetailMenu = function () {
 
-        var data = {
+         $scope.data = {
             typesofcuisine: $scope.typesofcuisine,
             serving: $scope.serving,
             quantity: $scope.quantity,
             glutinfree: $scope.glutinfree,
             typeofmenu: $scope.typeofmenu,
-            other_details: $scope.other_details
-        }
-        if ($scope.typesofcuisine == '' || $scope.serving == '' || $scope.quantity == '' || $scope.glutinfree == '' || $scope.other_details == '') {
-            alert('Please fill all the fields');
-            return false
-        }
+            other_details: $scope.other_details,
+           // file:$('#file')[0].files[0]
+        };
+       // var formdata=new FormData;
+        // for( key in $scope.data){
+        //     formdata.append(key, $scope.data[key]);
+        // }
+         var file=$('#file')[0].files[0];
+     //   formdata.append('image',file);
+        
+        console.log($scope.data);
         DetailsData.search($routeParams.id)
             .then(function (res) {
                 $scope.checkData = res.data;
@@ -429,11 +319,14 @@ app.controller('menuDetailCtrl', function ($scope, $routeParams, $location, Deta
                 if ($scope.checkData.glutinfree == null || $scope.checkData.serving == null || $scope.checkData.quantity == null ||
                     $scope.checkData.typesofcuisine == null || $scope.checkData.other_details == null || $scope.checkData.typeofmenu == null
                 ) {
-                    DetailsData.create($routeParams.id, data)
+                    DetailsData.create($routeParams.id,$scope.data)
                         .then(function (res) {
                             console.log(res.data);
+
                             alert('You have successfully added details');
-                            DetailsData.search($routeParams.id)
+                            DetailsData.create($routeParams.id,file)
+                            .then(function(re){
+                                 DetailsData.search($routeParams.id)
                                 .then(function (response) {
                                     $scope.getMenuDetails = response.data;
                                     if ($scope.getMenuDetails.typeofmenu == true) {
@@ -447,6 +340,10 @@ app.controller('menuDetailCtrl', function ($scope, $routeParams, $location, Deta
                                 }, function (err) {
                                     console.log(err);
                                 });
+                            }),function(err){
+                                console.log(err);
+                            }
+                           
                             console.log($scope.getMenuDetails.other_details);
                             if ($scope.getMenuDetails.other_details != null) {
                                 $scope.showButton = true;
@@ -520,7 +417,7 @@ app.controller('ShowMenuCtrl', function ($scope, $rootScope, MenuData, Restauran
         });
 
     $scope.MenuDetailPage = function (id) {
-        $location.path('/menuDetails' + id + '/' + $routeParams.restaurant + '/' + $routeParams.id);
+        $location.path('/menuDetails' + id );
     }
 
     function arrayObjectIndexOf(getRestaurant, searchRest) {

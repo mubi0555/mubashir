@@ -25,7 +25,7 @@ var app=angular.module('MyApp');
             templateUrl: 'views/pages/updatemenu.html',
             controller: 'ShowMenuCtrl'
         })
-        .when('/menuDetails:id/:name/:restID',{
+        .when('/menuDetails:id',{
             templateUrl:'views/pages/menuDetails.html',
             controller: 'menuDetailCtrl'
         })
